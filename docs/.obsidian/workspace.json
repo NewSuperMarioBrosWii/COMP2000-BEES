@@ -13,8 +13,8 @@
             "state": {
               "type": "pm-dashboard",
               "state": {},
-              "icon": "chart-gantt",
-              "title": "Projects"
+              "icon": "lucide-ghost",
+              "title": "pm-dashboard"
             }
           },
           {
@@ -25,8 +25,8 @@
               "state": {
                 "filePath": "Projects/Bee Project.md"
               },
-              "icon": "chart-gantt",
-              "title": "Bee Proje…"
+              "icon": "lucide-ghost",
+              "title": "pm-project"
             }
           },
           {
@@ -49,8 +49,8 @@
             "state": {
               "type": "pm-dashboard",
               "state": {},
-              "icon": "chart-gantt",
-              "title": "Projects"
+              "icon": "lucide-ghost",
+              "title": "pm-dashboard"
             }
           },
           {
@@ -236,8 +236,11 @@
   },
   "active": "e5f10a450120bbcc",
   "lastOpenFiles": [
-    "Projects/Bee Project.md",
+    "media/Bees.drawio.png",
+    "media/Bee Hierarchy.drawio.png",
+    "media",
     "Projects/Bee Project_tasks",
+    "Projects/Bee Project.md",
     "Projects",
     "README.md",
     "docs/What Is this folder for.md",
