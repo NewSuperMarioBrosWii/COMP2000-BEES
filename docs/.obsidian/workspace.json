@@ -4,33 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "4c7706b8664f4406",
+        "id": "7be230fea74bde9f",
         "type": "tabs",
         "children": [
           {
-            "id": "56a2c2ea87ae0991",
-            "type": "leaf",
-            "state": {
-              "type": "pm-dashboard",
-              "state": {},
-              "icon": "lucide-ghost",
-              "title": "pm-dashboard"
-            }
-          },
-          {
-            "id": "bf9f5949531719d9",
-            "type": "leaf",
-            "state": {
-              "type": "pm-project",
-              "state": {
-                "filePath": "Projects/Bee Project.md"
-              },
-              "icon": "lucide-ghost",
-              "title": "pm-project"
-            }
-          },
-          {
-            "id": "ace0175f4457d9ca",
+            "id": "300a18f9f21c731a",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -42,31 +20,8 @@
               "icon": "lucide-file",
               "title": "What Is this folder for"
             }
-          },
-          {
-            "id": "3bfab642ed235985",
-            "type": "leaf",
-            "state": {
-              "type": "pm-dashboard",
-              "state": {},
-              "icon": "lucide-ghost",
-              "title": "pm-dashboard"
-            }
-          },
-          {
-            "id": "e5f10a450120bbcc",
-            "type": "leaf",
-            "state": {
-              "type": "pm-project",
-              "state": {
-                "filePath": "Projects/Bee Project.md"
-              },
-              "icon": "chart-gantt",
-              "title": "Project"
-            }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "vertical"
@@ -234,14 +189,15 @@
       "project-manager:Project manager": false
     }
   },
-  "active": "e5f10a450120bbcc",
+  "active": "300a18f9f21c731a",
   "lastOpenFiles": [
-    "Projects/Bee Project_tasks/create-bee-class.md",
-    "Projects/Bee Project_tasks",
     "media/Bees.drawio.png",
     "media/Bee Hierarchy.drawio.png",
     "media",
+    "Projects/Bee Project_tasks/create-bee-class.md",
+    "What Is this folder for.md",
     "Projects/Bee Project.md",
+    "Projects/Bee Project_tasks",
     "Projects",
     "README.md",
     "docs/What Is this folder for.md",
