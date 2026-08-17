@@ -62,7 +62,7 @@
                 "filePath": "Projects/Bee Project.md"
               },
               "icon": "chart-gantt",
-              "title": "Bee Proje…"
+              "title": "Project"
             }
           }
         ],
@@ -236,10 +236,11 @@
   },
   "active": "e5f10a450120bbcc",
   "lastOpenFiles": [
+    "Projects/Bee Project_tasks/create-bee-class.md",
+    "Projects/Bee Project_tasks",
     "media/Bees.drawio.png",
     "media/Bee Hierarchy.drawio.png",
     "media",
-    "Projects/Bee Project_tasks",
     "Projects/Bee Project.md",
     "Projects",
     "README.md",
