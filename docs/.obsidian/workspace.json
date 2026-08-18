@@ -11,12 +11,14 @@
             "id": "300a18f9f21c731a",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "media/Bee Hierarchy.drawio.png"
+                "file": "Visuals.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Bee Hierarchy.drawio"
+              "icon": "lucide-file",
+              "title": "Visuals"
             }
           }
         ]
@@ -189,10 +191,11 @@
   },
   "active": "300a18f9f21c731a",
   "lastOpenFiles": [
+    "What Is this folder for.md",
+    "Visuals.md",
+    "media/Bee Hierarchy.drawio.png",
     "Projects",
     "media/Bees.drawio.png",
-    "media/Bee Hierarchy.drawio.png",
-    "What Is this folder for.md",
     "media",
     "Projects/Bee Project_tasks/create-bee-class.md",
     "Projects/Bee Project.md",

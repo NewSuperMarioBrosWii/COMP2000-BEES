@@ -13,7 +13,7 @@ public class App {
         //the current setup is a orbiting camera that is controlled with the left and right arrow keys and a zoom with up and down
         //idk if we should add a way to change the pitch but its not nessesary for it to work
         Vector3 CameraOrigin = new Vector3();
-
+        
         Camera3D camera = new Camera3D()
                 .target(new Vector3())
                 .up(new Vector3().x(0).y(1).z(0))
