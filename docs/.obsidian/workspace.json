@@ -11,14 +11,12 @@
             "id": "300a18f9f21c731a",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "What Is this folder for.md",
-                "mode": "source",
-                "source": false
+                "file": "media/Bee Hierarchy.drawio.png"
               },
-              "icon": "lucide-file",
-              "title": "What Is this folder for"
+              "icon": "lucide-image",
+              "title": "Bee Hierarchy.drawio"
             }
           }
         ]
@@ -191,14 +189,14 @@
   },
   "active": "300a18f9f21c731a",
   "lastOpenFiles": [
+    "Projects",
     "media/Bees.drawio.png",
     "media/Bee Hierarchy.drawio.png",
+    "What Is this folder for.md",
     "media",
     "Projects/Bee Project_tasks/create-bee-class.md",
-    "What Is this folder for.md",
     "Projects/Bee Project.md",
     "Projects/Bee Project_tasks",
-    "Projects",
     "README.md",
     "docs/What Is this folder for.md",
     "docs"
