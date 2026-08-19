@@ -28,11 +28,14 @@ public class App {
         float rotationSpeed = 2.0f;
         //---
 
-        Bee SelectedBee = null;
+        Hive hive = new Hive(CameraOrigin);
+        hive.CreateBee();
+
+        Object Selected = null;
 
         while (!WindowShouldClose()) {
             float deltaTime = GetFrameTime();
-            //Ray MouseRay = GetScreenToWorldRay(GetMousePosition(), camera);
+            Ray MouseRay = GetScreenToWorldRay(GetMousePosition(), camera);
 
             //--- this section is for processing the scene camera controls
             if (IsKeyDown(KEY_LEFT))  yaw -= rotationSpeed * deltaTime;
@@ -52,22 +55,55 @@ public class App {
             //This is where all the drawing is done
             BeginDrawing();
                 ClearBackground(RAYWHITE);
-
+                
                 //This is where the 3d is drawn
                 BeginMode3D(camera);
                     DrawGrid(20, 1.0f);
-                    //bees go here
+
+                    if(hive!=null){
+                        for(Bee bee: hive.Bees){
+                            bee.draw(camera);
+                            bee.update(deltaTime);
+
+                            // the wolf does not flinch at "should be accessed in a static way" (idk what to do differently)
+                            if(GetRayCollisionBox(MouseRay, bee.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                                Selected = bee;
+                            }
+                        }
+                    }
 
                 EndMode3D();
-                if(SelectedBee != null) {DrawBeeStats(SelectedBee);}
+
+                if(Selected != null) {DrawBeeStats(Selected);}
             EndDrawing();
         }
     }
 
+
+
     //the stats can be but on screne with DrawText
     //its probably good to have the full string of data layed out and then drawing it with one call
-    static void DrawBeeStats(Bee Bee){
-        String status = "Name: " + Bee.toString();
+    static void DrawBeeStats(Object Item){
+        String status = "";
+
+        switch (Item) {
+            case Bee bee:
+                status = "Object: " + bee.toString() + "\n" + "Name: " + bee.Name;
+                break;
+
+            case Location place:
+                status = "Object: " + place.toString() + "\n" + "Name: " + place.Name;
+                switch (place) {
+                    case Hive hive:
+                        status = status + "\n" + "Honey Count: " + Integer.toString(hive.Capacity);
+                        break;
+                    default:
+                        break;
+                }
+            default:
+                break;
+        }
+
         DrawText(status, 20, 20, 20, BLACK);
     }   
 }
