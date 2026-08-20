@@ -6,7 +6,7 @@ import com.raylib.Raylib.Vector3;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        InitWindow(1280, 720, "Demo");
+        InitWindow(1280, 720, "Bee Simulator");
         SetTargetFPS(60);
 
         //--- this is all camera setup releated stuff
@@ -27,8 +27,13 @@ public class App {
         float pitch = 0.2f;
         float rotationSpeed = 2.0f;
         //---
+        
 
-        Hive hive = new Hive(CameraOrigin);
+        Field flowers = new Field(CameraOrigin, 5f);
+
+        for(int i=0;i<20;i++){flowers.SpawnFlower();}
+
+        Hive hive = new Hive(CameraOrigin, flowers);
         hive.CreateBee();
 
         Object Selected = null;
@@ -60,30 +65,41 @@ public class App {
                 BeginMode3D(camera);
                     DrawGrid(20, 1.0f);
 
+                    //this is the bee update stuff
                     if(hive!=null){
                         for(Bee bee: hive.Bees){
                             bee.draw(camera);
                             bee.update(deltaTime);
 
-                            // the wolf does not flinch at "should be accessed in a static way" (idk what to do differently)
                             if(GetRayCollisionBox(MouseRay, bee.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
                                 Selected = bee;
                             }
                         }
                     }
 
+                    //this is the flowerfield update stuff
+                    if(flowers!=null){
+                        for(Flower flower : flowers.flowerfield){
+                            flower.DrawFlower(camera);
+
+                            if(GetRayCollisionBox(MouseRay, flower.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                                Selected = flower;
+                            }
+                        }
+                    }
+
                 EndMode3D();
 
-                if(Selected != null) {DrawBeeStats(Selected);}
+                if(Selected != null) DrawStats(Selected);
             EndDrawing();
         }
     }
 
 
 
-    //the stats can be but on screne with DrawText
+    //the text can be made with DrawText
     //its probably good to have the full string of data layed out and then drawing it with one call
-    static void DrawBeeStats(Object Item){
+    static void DrawStats(Object Item){
         String status = "";
 
         switch (Item) {
@@ -95,7 +111,7 @@ public class App {
                 status = "Object: " + place.toString() + "\n" + "Name: " + place.Name;
                 switch (place) {
                     case Hive hive:
-                        status = status + "\n" + "Honey Count: " + Integer.toString(hive.Capacity);
+                        status = status + "\n" + "Honey Count: " + Integer.toString(hive.HoneyCapacity);
                         break;
                     default:
                         break;

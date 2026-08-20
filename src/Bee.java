@@ -11,20 +11,22 @@ public class Bee implements CollisionBox {
     float Speed = 2f;
     float Scale = 1f;
 
-    String b = "🐝";
+    Hive myHive;
 
     public Texture VisualTexture = LoadTexture("Assets/Bee.png");
 
     public boolean EnabledCollider = true;
 
     public Vector3 Position = new Vector3();
-    Vector3 Target = new Vector3();
 
-    Bee(String Name){
+    //this might be moved to a subclass eventually
+    Flower Target;
+
+    Bee(String Name, Hive hive){
         this.Name = Name;
     }
 
-    Bee(String Name, String Sprite){
+    Bee(String Name, String Sprite, Hive hive){
         this.Name = Name;
         VisualTexture = LoadTexture(Sprite);
     }
