@@ -11,7 +11,7 @@ import com.raylib.Raylib.Vector3;
 */
 
 public interface CollisionBox {
-    public boolean DrawCollider = true;
+    public boolean DrawCollider = false;
     public BoundingBox Collider = new BoundingBox();
 
     public default void CreateUniformCollider(Vector3 Position, float Scale){

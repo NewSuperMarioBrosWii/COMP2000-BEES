@@ -1,5 +1,5 @@
 import com.raylib.Raylib.Vector3;
-abstract class Location {
+abstract class Location implements CollisionBox{
     public String Name;
     public Vector3 Position = new Vector3();
     

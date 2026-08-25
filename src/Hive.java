@@ -24,5 +24,9 @@ public class Hive extends Location {
         int randflower = new Random().nextInt(0, field.flowerfield.size());
         return field.flowerfield.get(randflower);
     }
+
+    public void DrawHive(){
+        CreateUniformCollider(Position, 1.0f);
+    }
     
 }

@@ -5,7 +5,7 @@ import com.raylib.Raylib.Vector3;
 
 public class Field extends Location{
     public ArrayList<Flower> flowerfield = new ArrayList<>();
-    public float fieldSize = 5;
+    public float fieldSize = 10;
 
 
     Field(Vector3 Location, float fieldSize) {

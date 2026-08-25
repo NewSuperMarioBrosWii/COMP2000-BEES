@@ -1,6 +1,7 @@
 import static com.raylib.Raylib.*;
 import static com.raylib.Colors.*;
 import com.raylib.Raylib.Camera3D;
+import com.raylib.Raylib.Model;
 import com.raylib.Raylib.Ray;
 import com.raylib.Raylib.Vector3;
 
@@ -28,15 +29,19 @@ public class App {
         float rotationSpeed = 2.0f;
         //---
         
+        // this area im mainly using for initalising the scene so ex. the field, hives and models
 
-        Field flowers = new Field(CameraOrigin, 5f);
+        Field flowers = new Field(CameraOrigin, 9f);
+        for(int i=0;i<50;i++){flowers.SpawnFlower();}//temp flower spawner
 
-        for(int i=0;i<20;i++){flowers.SpawnFlower();}
-
-        Hive hive = new Hive(CameraOrigin, flowers);
+        Hive hive = new Hive(new Vector3().x(0.4f).y(2.1f).z(-1f), flowers);
         hive.CreateBee();
 
         Object Selected = null;
+
+        Model treeModel = LoadModel("Assets/beetree.obj");
+
+        //---
 
         while (!WindowShouldClose()) {
             float deltaTime = GetFrameTime();
@@ -59,16 +64,20 @@ public class App {
 
             //This is where all the drawing is done
             BeginDrawing();
-                ClearBackground(RAYWHITE);
+                ClearBackground(BLUE);
                 
                 //This is where the 3d is drawn
                 BeginMode3D(camera);
-                    DrawGrid(20, 1.0f);
+
+                    //this model is the whole tree and grass plain
+                    DrawModel(treeModel, CameraOrigin, 1.0f, RAYWHITE);
 
                     //this is the bee update stuff
                     if(hive!=null){
+                        hive.DrawHive();
+                        
                         for(Bee bee: hive.Bees){
-                            bee.draw(camera);
+                            bee.Draw(camera);
                             bee.update(deltaTime);
 
                             if(GetRayCollisionBox(MouseRay, bee.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){

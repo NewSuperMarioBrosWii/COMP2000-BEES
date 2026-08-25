@@ -5,7 +5,7 @@ import com.raylib.Raylib.Camera3D;
 import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
 
-public class Flower extends Location implements CollisionBox{
+public class Flower extends Location{
     public String FlowerName = "";
     public Texture VisualTexture = LoadTexture("Assets/flower.png");
     float Scale = 1f;

@@ -36,7 +36,7 @@ public class Bee implements CollisionBox {
 
     }
 
-    public void draw(Camera3D Camera){
+    public void Draw(Camera3D Camera){
         DrawBillboard(Camera, VisualTexture, Position, Scale, RAYWHITE);
         if(EnabledCollider){
             CreateUniformCollider(Position, Scale);
