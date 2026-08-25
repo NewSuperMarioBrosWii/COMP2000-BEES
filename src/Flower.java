@@ -22,7 +22,7 @@ public class Flower extends Location{
     }
 
     public void DrawFlower(Camera3D camera){
-        Vector3 offsetPos = new Vector3().y(0.5f).x(Position.x()).z(Position.z());
+        Vector3 offsetPos = new Vector3().y(Scale/2).x(Position.x()).z(Position.z());
         DrawBillboard(camera, VisualTexture, offsetPos, Scale, RAYWHITE);
         CreateUniformCollider(offsetPos, Scale);
     }

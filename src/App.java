@@ -75,6 +75,10 @@ public class App {
                     //this is the bee update stuff
                     if(hive!=null){
                         hive.DrawHive();
+
+                        if(GetRayCollisionBox(MouseRay, hive.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                            Selected = hive;
+                        }
                         
                         for(Bee bee: hive.Bees){
                             bee.Draw(camera);
@@ -121,6 +125,9 @@ public class App {
                 switch (place) {
                     case Hive hive:
                         status = status + "\n" + "Honey Count: " + Integer.toString(hive.HoneyCapacity);
+                        break;
+                    case Flower flower:
+                        status = status + "\n" + "Pollen Count: " + Integer.toString(flower.Pollen);
                         break;
                     default:
                         break;

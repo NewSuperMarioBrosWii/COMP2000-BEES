@@ -9,9 +9,10 @@ import com.raylib.Raylib.Vector3;
 public class Bee implements CollisionBox {
     public String Name = "Bee";
     float Speed = 2f;
-    float Scale = 1f;
+    float Scale = 0.5f;
 
     Hive myHive;
+    boolean InHive = false;
 
     public Texture VisualTexture = LoadTexture("Assets/Bee.png");
 
