@@ -15,7 +15,8 @@ public class Field extends Location{
 
     public void fieldCheck(){
         for(Flower f : flowerfield){
-            if(f.Pollen == 0){
+            if(f != null && f.Pollen <= 0){
+                System.out.println(f);
                 flowerfield.remove(f);
             }
         }

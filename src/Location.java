@@ -1,4 +1,5 @@
 import com.raylib.Raylib.Vector3;
+import Components.CollisionBox;
 abstract class Location implements CollisionBox{
     public String Name;
     public Vector3 Position = new Vector3();

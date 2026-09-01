@@ -16,12 +16,15 @@ public class Hive extends Location {
     
     //this will eventually be the larva spawner
     public void CreateBee(){
-        Bee NewBee = new Bee("beeson", this);
+        BeeWorker NewBee = new BeeWorker("beeson", this);
         Bees.add(NewBee);
     }
 
     public Flower pickFlower(){
         int randflower = new Random().nextInt(0, field.flowerfield.size());
+        if(field.flowerfield.get(randflower).occupied == true){
+            pickFlower();
+        }
         return field.flowerfield.get(randflower);
     }
 

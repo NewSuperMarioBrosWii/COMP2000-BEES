@@ -4,6 +4,8 @@ import com.raylib.Raylib.Camera3D;
 import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
 
+import Components.CollisionBox;
+
 //🐝
 
 public class Bee implements CollisionBox {
@@ -19,9 +21,6 @@ public class Bee implements CollisionBox {
     public boolean EnabledCollider = true;
 
     public Vector3 Position = new Vector3();
-
-    //this might be moved to a subclass eventually
-    Flower Target;
 
     Bee(String Name, Hive hive){
         this.Name = Name;

@@ -3,6 +3,7 @@ import static com.raylib.Colors.*;
 import com.raylib.Raylib.Camera3D;
 import com.raylib.Raylib.Model;
 import com.raylib.Raylib.Ray;
+import com.raylib.Raylib.Rectangle;
 import com.raylib.Raylib.Vector3;
 
 public class App {
@@ -36,12 +37,18 @@ public class App {
 
         Hive hive = new Hive(new Vector3().x(0.4f).y(2.1f).z(-1f), flowers);
         hive.CreateBee();
+        hive.CreateBee();
+        hive.CreateBee();
 
         Object Selected = null;
 
         Model treeModel = LoadModel("Assets/beetree.obj");
 
         //---
+
+        Rectangle button  = new Rectangle();
+                button.height(40).width(100);
+                button.x(20).y(660);
 
         while (!WindowShouldClose()) {
             float deltaTime = GetFrameTime();
@@ -94,6 +101,7 @@ public class App {
                     if(flowers!=null){
                         for(Flower flower : flowers.flowerfield){
                             flower.DrawFlower(camera);
+                            //flowers.fieldCheck();
 
                             if(GetRayCollisionBox(MouseRay, flower.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
                                 Selected = flower;
@@ -104,6 +112,13 @@ public class App {
                 EndMode3D();
 
                 if(Selected != null) DrawStats(Selected);
+                
+                
+                //this is a example button that spawns a bee
+                if(GuiButton(button,"Spawn Bee")==1){
+                    hive.CreateBee();
+                }
+
             EndDrawing();
         }
     }
@@ -124,7 +139,7 @@ public class App {
                 status = "Object: " + place.toString() + "\n" + "Name: " + place.Name;
                 switch (place) {
                     case Hive hive:
-                        status = status + "\n" + "Honey Count: " + Integer.toString(hive.HoneyCapacity);
+                        status = status + "\n" + "Honey Count: " + Integer.toString(hive.HoneyCapacity) + "\n" + "Bee Count: " + Integer.toString(hive.Bees.size());
                         break;
                     case Flower flower:
                         status = status + "\n" + "Pollen Count: " + Integer.toString(flower.Pollen);

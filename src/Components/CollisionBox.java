@@ -1,3 +1,4 @@
+package Components;
 import static com.raylib.Colors.RED;
 import static com.raylib.Raylib.*;
 
