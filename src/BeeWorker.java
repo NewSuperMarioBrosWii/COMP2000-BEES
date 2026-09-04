@@ -1,4 +1,3 @@
-import static com.raylib.Raylib.CheckCollisionBoxes;
 import static com.raylib.Raylib.Vector3Distance;
 import static com.raylib.Raylib.Vector3Lerp;
 
