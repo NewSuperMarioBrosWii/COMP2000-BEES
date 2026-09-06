@@ -17,6 +17,10 @@ everything else should be in java docs
 		- [ ] Flower Class
 	- [ ] Hive Class
 
+- [ ] Base Enemy Class
+	- [ ] Wasp Class
+	- [ ] Exterminator Class
+
 # Specific Things
 
 - [ ] Generics

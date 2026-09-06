@@ -193,18 +193,17 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
-      "obsidian-kanban:Create new board": false,
-      "card-board:CardBoard": false
+      "obsidian-kanban:Create new board": false
     }
   },
   "active": "300a18f9f21c731a",
   "lastOpenFiles": [
     "TODOS.md",
-    "Progress Tracker KanBan (obsidian).md",
-    "DiscussionBoard.md",
-    "What Is this folder for.md",
     "media/Bees.drawio.png",
     "media/Bee Hierarchy.drawio.png",
+    "DiscussionBoard.md",
+    "Progress Tracker KanBan (obsidian).md",
+    "What Is this folder for.md",
     "Untitled.canvas",
     "Untitled.base",
     "Visuals.md",

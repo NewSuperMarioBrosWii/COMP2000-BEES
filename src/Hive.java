@@ -6,7 +6,7 @@ import com.raylib.Raylib.Vector3;
 public class Hive extends Location {
 
     public int HoneyCapacity = 0;
-    public ArrayList<Bee> Bees = new ArrayList<>();
+    public static ArrayList<Bee> Bees = new ArrayList<>();
     Field field;
     
     Hive(Vector3 Location, Field field) {

@@ -7,12 +7,14 @@ kanban-plugin: board
 ## TODO
 
 - [ ] Second Bee Subclass
-- [ ] Wasps
+- [ ] Exterminator
 
 
 ## In Progress
 
 - [ ] Flower Generator
+- [ ] Base Enemy class
+- [ ] Wasps
 
 
 ## Functional
