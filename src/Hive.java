@@ -10,6 +10,7 @@ public class Hive extends Location {
 
     public int HoneyCapacity = 0;
     public static ArrayList<Bee> Bees = new ArrayList<>();
+    public static ArrayList<QueenBee> Queens = new ArrayList<>();
     Field field;
     
     Hive(Vector3 Location, Field field) {
@@ -22,6 +23,11 @@ public class Hive extends Location {
     public void CreateBee(){
         BeeWorker NewBee = new BeeWorker("beeson", this, BeeTexture);
         Bees.add(NewBee);
+    }
+
+    public void CreateQueen(){
+        QueenBee myQueen = new QueenBee("Beyonce", this , BeeTexture);
+        Queens.add(myQueen);
     }
 
     public Flower pickFlower(){

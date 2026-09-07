@@ -39,6 +39,7 @@ public class App {
         hive.CreateBee();
         hive.CreateBee();
         hive.CreateBee();
+        hive.CreateQueen();
 
         Object Selected = null;
 
@@ -107,6 +108,16 @@ public class App {
                             if(GetRayCollisionBox(MouseRay, bee.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
                                 Selected = bee;
                             }
+                        }
+
+                        for(QueenBee queen: hive.Queens){
+                            queen.Draw(camera);
+                            queen.update(deltaTime);
+
+                            if(GetRayCollisionBox(MouseRay, queen.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                                Selected = queen;
+                            }
+
                         }
                     }
                     
