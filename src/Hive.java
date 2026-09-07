@@ -1,6 +1,9 @@
+import static com.raylib.Raylib.LoadTexture;
+
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
 
 public class Hive extends Location {
@@ -14,9 +17,10 @@ public class Hive extends Location {
         this.field = field;
     }
     
+    public Texture BeeTexture = LoadTexture("Assets/Bee.png");
     //this will eventually be the larva spawner
     public void CreateBee(){
-        BeeWorker NewBee = new BeeWorker("beeson", this);
+        BeeWorker NewBee = new BeeWorker("beeson", this, BeeTexture);
         Bees.add(NewBee);
     }
 

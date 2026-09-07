@@ -79,6 +79,19 @@ public class App {
                     //this model is the whole tree and grass plain
                     DrawModel(treeModel, CameraOrigin, 1.0f, RAYWHITE);
 
+                    //this is the flowerfield update stuff
+                    if(flowers!=null){
+                        flowers.fieldCheck();
+                        for(Flower flower : flowers.flowerfield){
+                            flower.DrawFlower(camera);
+                            
+
+                            if(GetRayCollisionBox(MouseRay, flower.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                                Selected = flower;
+                            }
+                        }
+                    }
+
                     //this is the bee update stuff
                     if(hive!=null){
                         hive.DrawHive();
@@ -96,18 +109,7 @@ public class App {
                             }
                         }
                     }
-
-                    //this is the flowerfield update stuff
-                    if(flowers!=null){
-                        for(Flower flower : flowers.flowerfield){
-                            flower.DrawFlower(camera);
-                            //flowers.fieldCheck();
-
-                            if(GetRayCollisionBox(MouseRay, flower.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-                                Selected = flower;
-                            }
-                        }
-                    }
+                    
 
                 EndMode3D();
 
@@ -131,8 +133,8 @@ public class App {
         String status = "";
 
         switch (Item) {
-            case Bee bee:
-                status = "Object: " + bee.toString() + "\n" + "Name: " + bee.Name;
+            case BeeWorker bee:
+                status = "Object: " + bee.toString() + "\n" + "Name: " + bee.Name + "\n" + "Nector Count: " + Float.toString(bee.nector);
                 break;
 
             case Location place:
@@ -142,7 +144,7 @@ public class App {
                         status = status + "\n" + "Honey Count: " + Integer.toString(hive.HoneyCapacity) + "\n" + "Bee Count: " + Integer.toString(hive.Bees.size());
                         break;
                     case Flower flower:
-                        status = status + "\n" + "Pollen Count: " + Integer.toString(flower.Pollen);
+                        status = status + "\n" + "Pollen Count: " + Float.toString(flower.Pollen);
                         break;
                     default:
                         break;

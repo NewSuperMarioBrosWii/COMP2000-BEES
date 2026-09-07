@@ -16,14 +16,15 @@ public class Bee implements CollisionBox {
     Hive myHive;
     boolean InHive = false;
 
-    public Texture VisualTexture = LoadTexture("Assets/Bee.png");
+    public Texture VisualTexture;// = LoadTexture("Assets/Bee.png");
 
     public boolean EnabledCollider = true;
 
     public Vector3 Position = new Vector3();
 
-    Bee(String Name, Hive hive){
+    Bee(String Name, Hive hive, Texture texture){
         this.Name = Name;
+        this.VisualTexture = texture;
     }
 
     Bee(String Name, String Sprite, Hive hive){
