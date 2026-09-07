@@ -33,7 +33,7 @@ public class App {
         // this area im mainly using for initalising the scene so ex. the field, hives and models
 
         Field flowers = new Field(CameraOrigin, 9f);
-        for(int i=0;i<50;i++){flowers.SpawnFlower();}//temp flower spawner
+        for(int i=0;i<200;i++){flowers.SpawnFlower();}//temp flower spawner
 
         Hive hive = new Hive(new Vector3().x(0.4f).y(2.1f).z(-1f), flowers);
         hive.CreateBee();

@@ -1,6 +1,5 @@
 import static com.raylib.Colors.RAYWHITE;
 import static com.raylib.Raylib.DrawBillboard;
-//import static com.raylib.Raylib.LoadTexture;
 import com.raylib.Raylib.Camera3D;
 import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;

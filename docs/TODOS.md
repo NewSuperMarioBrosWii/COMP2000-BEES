@@ -9,17 +9,17 @@ everything else should be in java docs
 
 - [x] Base Bee Class
 	- [ ] Worker Bee
-	- [ ] Queen Bee
+	- [ ] Queen Bee - farah
 - [ ] Larvae Class
 
 - [x] Base Location Class
-	- [ ] Field Class
+	- [ ] Field Class  - james
 		- [ ] Flower Class
 	- [ ] Hive Class
 
 - [ ] Base Enemy Class
-	- [ ] Wasp Class
-	- [ ] Exterminator Class
+	- [ ] Wasp Class - bianca
+	- [ ] Exterminator Class - spenser
 
 # Specific Things
 
