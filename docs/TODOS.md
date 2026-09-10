@@ -9,7 +9,7 @@ everything else should be in java docs
 
 - [x] Base Bee Class
 	- [ ] Worker Bee
-	- [ ] Queen Bee - farah
+	- [X] Queen Bee - farah
 - [ ] Larvae Class
 
 - [x] Base Location Class
@@ -23,8 +23,8 @@ everything else should be in java docs
 
 # Specific Things
 
-- [ ] Generics
-- [ ] Exception Handling
+- [x} Generics - (farah added one in hive)
+- [x ] Exception Handling (farah added one in hive)
 - [ ] Design Patterns
 - [ ] Interfaces
 - [x] Abstract Classes
