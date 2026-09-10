@@ -11,21 +11,14 @@
             "id": "300a18f9f21c731a",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "markdown",
               "state": {
-                "file": "Progress Tracker KanBan (obsidian).md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false,
-                    false
-                  ]
-                }
+                "file": "DiscussionBoard.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-trello",
-              "title": "Progress Tracker KanBan (obsidian)"
+              "icon": "lucide-file",
+              "title": "DiscussionBoard"
             }
           }
         ]

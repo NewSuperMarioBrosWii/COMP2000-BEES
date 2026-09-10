@@ -51,6 +51,11 @@ public class App {
                 button.height(40).width(100);
                 button.x(20).y(660);
 
+        Rectangle Waspbutton  = new Rectangle();
+                Waspbutton.height(40).width(100);
+                Waspbutton.x(20).y(600);    //assuming this spot is ok?
+
+
         while (!WindowShouldClose()) {
             float deltaTime = GetFrameTime();
             Ray MouseRay = GetScreenToWorldRay(GetMousePosition(), camera);
@@ -119,6 +124,17 @@ public class App {
                             }
 
                         }
+                       Hive.BeeCheck();    //remove dead bees -- breaks bee spawn
+                       if(flowers.wasps!=null){
+                        for(EnemyWasp wasp: flowers.wasps){
+                            wasp.Draw(camera);
+                            wasp.update(deltaTime);
+
+                            if(GetRayCollisionBox(MouseRay, wasp.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                                Selected = wasp;
+                            }
+                        }
+                       }
                     }
                     
 
@@ -130,6 +146,10 @@ public class App {
                 //this is a example button that spawns a bee
                 if(GuiButton(button,"Spawn Bee")==1){
                     hive.CreateBee();
+                }
+
+                if(GuiButton(Waspbutton,"Spawn Wasp")==1){
+                    flowers.spawnWasp();
                 }
 
             EndDrawing();

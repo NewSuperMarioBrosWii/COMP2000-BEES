@@ -15,6 +15,7 @@ public class Bee implements CollisionBox {
 
     Hive myHive;
     boolean InHive = false;
+    boolean isAlive = true;
 
     public Texture VisualTexture;// = LoadTexture("Assets/Bee.png");
 

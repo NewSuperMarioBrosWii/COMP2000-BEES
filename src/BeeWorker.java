@@ -45,6 +45,7 @@ public class BeeWorker extends Bee{
                     return;
                 }
                 Target.occupied = true;
+                InHive=false;
                 Vector3 offsetPos = new Vector3().y(0.8f).x(Target.Position.x()).z(Target.Position.z());
 
                 if(Vector3Distance(Position, offsetPos) < 0.1 / Speed){
@@ -69,6 +70,7 @@ public class BeeWorker extends Bee{
                 if(Vector3Distance(Position, myHive.Position) < 0.1 / Speed){
                     myHive.HoneyCapacity += Math.round(nector);
                     nector = 0f;
+                    InHive=true;
                     state = BeeState.RESTING;
                 }
                 else{
