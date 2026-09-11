@@ -7,6 +7,14 @@ import com.raylib.Raylib.Rectangle;
 import com.raylib.Raylib.Vector3;
 
 public class App {
+
+    static boolean simulating = true;
+    
+    static float minDistance = 2.0f;
+    static float maxDistance = 40.0f;
+    static float rotationSpeed = 2.0f;
+    static float zoomSpeed = 8.0f;
+    
     public static void main(String[] args) throws Exception {
         InitWindow(1280, 720, "Bee Simulator");
         SetTargetFPS(60);
@@ -21,13 +29,10 @@ public class App {
                 .up(new Vector3().x(0).y(1).z(0))
                 .fovy(45).projection(CAMERA_PERSPECTIVE);
         
+        
         float distance = 10.0f;
-        float minDistance = 2.0f;
-        float maxDistance = 40.0f;
-        float zoomSpeed = 8.0f;
         float yaw = 0.0f;
         float pitch = 0.2f;
-        float rotationSpeed = 2.0f;
         //---
         
         // this area im mainly using for initalising the scene so ex. the field, hives and models
@@ -36,20 +41,21 @@ public class App {
         for(int i=0;i<200;i++){flowers.SpawnFlower();}//temp flower spawner
 
         Hive hive = new Hive(new Vector3().x(0.4f).y(2.1f).z(-1f), flowers);
-        hive.CreateBee();
-        hive.CreateBee();
-        hive.CreateBee();
-        hive.CreateQueen();
+        for(int i=0;i<50;i++){hive.CreateBee();}//temp start bee spawner
+        //hive.CreateQueen();
 
         Object Selected = null;
-
         Model treeModel = LoadModel("Assets/beetree.obj");
 
         //---
 
-        Rectangle button  = new Rectangle();
-                button.height(40).width(100);
-                button.x(20).y(660);
+        Rectangle AddBeeButton  = new Rectangle();
+                AddBeeButton.height(40).width(100);
+                AddBeeButton.x(20).y(660);
+        
+        Rectangle PauseButtonrRectangle  = new Rectangle();
+                PauseButtonrRectangle.height(40).width(100);
+                PauseButtonrRectangle.x(130).y(660);
 
         while (!WindowShouldClose()) {
             float deltaTime = GetFrameTime();
@@ -103,14 +109,18 @@ public class App {
                         
                         for(Bee bee: hive.Bees){
                             bee.Draw(camera);
-                            bee.update(deltaTime);
+                            if(simulating){
+                                bee.update(deltaTime);
+                            }
+                            
 
                             if(GetRayCollisionBox(MouseRay, bee.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
                                 Selected = bee;
                             }
                         }
-
-                        for(QueenBee queen: hive.Queens){
+                        //we don't need to do this because we can downcast the queen bee into the other bees and it will know its a bee
+                        /*                         
+                            for(QueenBee queen: hive.Queens){
                             queen.Draw(camera);
                             queen.update(deltaTime);
 
@@ -118,22 +128,40 @@ public class App {
                                 Selected = queen;
                             }
 
-                        }
+                        } */
                     }
                     
 
                 EndMode3D();
 
                 if(Selected != null) DrawStats(Selected);
-                
-                
                 //this is a example button that spawns a bee
-                if(GuiButton(button,"Spawn Bee")==1){
+                if(GuiButton(AddBeeButton,"Spawn Bee")==1){
                     hive.CreateBee();
+                }
+
+                String c_playing = "pause";
+                if(simulating){
+                    c_playing = "Pause";
+                }else{
+                    c_playing = "Play";
+                }
+                
+                if(GuiButton(PauseButtonrRectangle,c_playing)==1){
+                    if(simulating){
+                        simulating = false;
+                    }
+                    else{
+                        simulating = true;
+                    }
                 }
 
             EndDrawing();
         }
+    }
+
+    void DrawButtons(){
+        
     }
 
 

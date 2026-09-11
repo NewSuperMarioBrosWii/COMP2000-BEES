@@ -9,3 +9,4 @@ abstract class Location implements CollisionBox{
         this.Position = Location;
     }
 }
+//this should probably be entity rather than location

@@ -14,6 +14,7 @@ public class Enemy implements CollisionBox {
     float speed = 2f; //same speed as bees?
 
     //I also took this from the bee class
+    //if its in the base class then it doesn't need to be specified here
     public boolean EnabledCollider = true;
     public Vector3 Position = new Vector3();
 

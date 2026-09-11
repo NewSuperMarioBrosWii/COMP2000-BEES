@@ -1,10 +1,8 @@
-import static com.raylib.Raylib.LoadTexture;
-
 import java.util.ArrayList;
 import java.util.Random;
-
 import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
+import static com.raylib.Raylib.LoadTexture;
 
 public class Field extends Location{
     public ArrayList<Flower> flowerfield = new ArrayList<>();
@@ -28,10 +26,13 @@ public class Field extends Location{
     }
 
     public void SpawnFlower(){
+        Flower newflower = new Flower("tulip", RandomFloorPos(fieldSize), 100,FlowerTexture);
+        flowerfield.add(newflower);
+    }
+
+    public Vector3 RandomFloorPos(float fieldSize){
         float randx = new Random().nextFloat(-fieldSize, fieldSize);
         float randz = new Random().nextFloat(-fieldSize, fieldSize);
-
-        Flower newflower = new Flower("tulip", new Vector3().x(randx).z(randz), 100,FlowerTexture);
-        flowerfield.add(newflower);
+        return new Vector3().x(randx).y(0.0f).z(randz);
     }
 }
