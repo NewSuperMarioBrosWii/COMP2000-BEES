@@ -6,7 +6,9 @@
             "name": "App",
             "request": "launch",
             "mainClass": "App",
-            "vmArgs": "-XstartOnFirstThread"
+            "osx": {
+                "vmArgs": "-XstartOnFirstThread"
+            }
         }
     ]
 }

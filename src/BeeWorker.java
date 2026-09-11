@@ -1,10 +1,8 @@
 import static com.raylib.Raylib.Vector3Distance;
 import static com.raylib.Raylib.Vector3Lerp;
-
-import java.util.Random;
-
 import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
+import java.util.Random;
 
 public class BeeWorker extends Bee{
 
@@ -19,6 +17,7 @@ public class BeeWorker extends Bee{
         STACHING,
         ATTACK;
     }
+
     BeeState state = BeeState.RESTING;
     Flower Target;
 
