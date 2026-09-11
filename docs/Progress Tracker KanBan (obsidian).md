@@ -14,13 +14,13 @@ kanban-plugin: board
 
 - [ ] Flower Generator
 - [ ] Base Enemy class
-- [ ] Wasps
 
 
 ## Functional
 
 - [ ] Scene Drawing
 - [ ] Object Picker
+- [ ] Wasps
 
 
 ## Refactor/Rework

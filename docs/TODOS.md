@@ -18,7 +18,7 @@ everything else should be in java docs
 	- [ ] Hive Class
 
 - [ ] Base Enemy Class
-	- [ ] Wasp Class - bianca
+	- [x] Wasp Class - bianca
 	- [ ] Exterminator Class - spenser
 
 # Specific Things

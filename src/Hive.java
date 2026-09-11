@@ -68,7 +68,6 @@ public class Hive extends Location {
         for(Bee b : Bees){
             if(!b.isAlive){
                 Bees.remove(b);
-                System.out.println("bee removed");
                 return;
             }
         }
