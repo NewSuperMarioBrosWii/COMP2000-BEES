@@ -36,7 +36,11 @@ public class BeeWorker extends Bee{
                 break;
             case BeeState.FETCHING:
                 if(Target == null){
-                    Target = myHive.pickFlower();
+                    try{
+                        Target = myHive.pickFlower();
+                    }catch (Hive.NoAvailableFlowerException e){
+                        //no flower free right now - try again next frame
+                    }
                     return;
                 }
                 Target.occupied = true;
