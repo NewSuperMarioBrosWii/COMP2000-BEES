@@ -215,7 +215,7 @@ public class App {
 
         switch (Item) {
             case BeeWorker bee:
-                status = "Object: " + bee.toString() + "\n" + "Name: " + bee.Name + "\n" + "Nector Count: " + Float.toString(bee.nector);
+                status = "Object: " + bee.toString() + "\n" + "Name: " + bee.Name + "\n" + "Nector Count: " + Float.toString(bee.getNectorCount());
                 break;
 
             case Location place:
@@ -235,8 +235,8 @@ public class App {
                 status="Object: "+enemy.toString()+"\n"+"Name: "+enemy.name;
                 switch (enemy){
                     case EnemyWasp wasp:
-                    status=status + "\n"+"Bees Killed: "+Integer.toString(wasp.beesKilled)
-                                +"\n"+"Honey Stolen: "+Integer.toString(wasp.honeyStolen);
+                    status=status + "\n"+"Bees Killed: "+Integer.toString(wasp.getBeesKilled())
+                                +"\n"+"Honey Stolen: "+Integer.toString(wasp.getHoneyStolen());
                     break;
                     default:
                         break;

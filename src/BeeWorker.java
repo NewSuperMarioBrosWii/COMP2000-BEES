@@ -6,11 +6,11 @@ import java.util.Random;
 
 public class BeeWorker extends Bee{
 
-    float nector = 0;
-    float MaxNector = 50;
-    int TakeRate = 10;
+    private float nector = 0;
+    private float MaxNector = 50;
+    private int TakeRate = 10;
 
-    enum BeeState {
+    private enum BeeState {
         RESTING,
         FETCHING,
         SAPPING,
@@ -83,6 +83,8 @@ public class BeeWorker extends Bee{
                 break;
         }
     }
-
+    public float getNectorCount(){
+        return this.nector;
+    }
 
 }
