@@ -8,8 +8,8 @@ import com.raylib.Raylib.Vector3;
 
 public class EnemyWasp extends Enemy {
     //attributes based off UML
-    static int beesKilled=0;
-    static int honeyStolen=0;
+    private int beesKilled=0;
+    private int honeyStolen=0;
 
     public Texture VisualTexture;
     boolean isAlive;
@@ -28,20 +28,20 @@ public class EnemyWasp extends Enemy {
         target=pickTarget();        
     }
     
-    public void Sting(){
+    private void Sting(){
         //check if bee is already dead, or in the hive
         if(!target.isAlive ||target.InHive){
             state=EnemyState.RESTING;
         }
         else{   //bee is alive --> sting == kill?
             target.isAlive=false;
-            honeyStolen+=((BeeWorker)target).nector;
+            honeyStolen+=((BeeWorker)target).getNectorCount();
             beesKilled++;
             state=EnemyState.RESTING;
         }
     }
 
-    public Vector3 getNewRandPos(){
+    private Vector3 getNewRandPos(){
         float randX = new Random().nextFloat(-fieldSize,fieldSize);
         float randY = new Random().nextFloat(-fieldSize/5,fieldSize/5);
         float randZ = new Random().nextFloat(-fieldSize,fieldSize);
@@ -98,4 +98,11 @@ public class EnemyWasp extends Enemy {
             }
     
         }
+    public int getBeesKilled(){
+        return this.beesKilled;
+    }
+
+    public int getHoneyStolen(){
+        return this.honeyStolen;
+    }
 }
