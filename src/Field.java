@@ -6,9 +6,11 @@ import static com.raylib.Raylib.LoadTexture;
 
 public class Field extends Location{
     public ArrayList<Flower> flowerfield = new ArrayList<>();
-    public float fieldSize = 10;
+    public ArrayList<EnemyWasp> wasps = new ArrayList<>();
+    public static float fieldSize = 10;
 
     public Texture FlowerTexture = LoadTexture("Assets/flower.png");
+    public Texture WaspTexture = LoadTexture("Assets/wasp.png");
 
     Field(Vector3 Location, float fieldSize) {
         super("Field", Location);
@@ -28,6 +30,12 @@ public class Field extends Location{
     public void SpawnFlower(){
         Flower newflower = new Flower("tulip", RandomFloorPos(fieldSize), 100,FlowerTexture);
         flowerfield.add(newflower);
+    }
+
+    public void spawnWasp(){
+        float randx = new Random().nextFloat(-fieldSize, fieldSize);
+        EnemyWasp newWasp = new EnemyWasp("Gwesped",new Vector3().x(randx).y(2.1f).z(-1f),WaspTexture);
+        wasps.add(newWasp);
     }
 
     public Vector3 RandomFloorPos(float fieldSize){

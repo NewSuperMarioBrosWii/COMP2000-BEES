@@ -64,6 +64,16 @@ public class Hive extends Location {
         return list.get(new Random().nextInt(list.size()));
     }
 
+      public static void BeeCheck(){
+        for(Bee b : Bees){
+            if(!b.isAlive){
+                Bees.remove(b);
+                return;
+            }
+        }
+    }
+
+
     public void DrawHive(){
         CreateUniformCollider(Position, 1.0f);
     }
