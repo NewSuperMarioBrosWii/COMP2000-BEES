@@ -2,6 +2,7 @@
 Resources:
 https://www.raylib.com/cheatsheet/cheatsheet.html - Graphics Library Functions
 https://www.raylib.com/cheatsheet/raymath_cheatsheet.html - Advanced math
+https://www.raylibhelp.com/reference/GuiButton/GuiButton.htm - GUI Buttons
 everything else should be in java docs
 
 ---

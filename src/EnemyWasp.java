@@ -8,8 +8,8 @@ import com.raylib.Raylib.Vector3;
 
 public class EnemyWasp extends Enemy {
     //attributes based off UML
-    int beesKilled=0;
-    int honeyStolen=0;
+    static int beesKilled=0;
+    static int honeyStolen=0;
 
     public Texture VisualTexture;
     boolean isAlive;

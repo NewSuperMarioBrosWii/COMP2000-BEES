@@ -57,9 +57,9 @@ public class App {
                 PauseButtonrRectangle.height(40).width(100);
                 PauseButtonrRectangle.x(130).y(660);
 
-        Rectangle Waspbutton  = new Rectangle();
-                Waspbutton.height(40).width(100);
-                Waspbutton.x(20).y(610);    //assuming this spot is ok?
+        Rectangle WaspButton  = new Rectangle();
+                WaspButton.height(40).width(100);
+                WaspButton.x(20).y(610);    //assuming this spot is ok?
 
 
         while (!WindowShouldClose()) {
@@ -160,13 +160,28 @@ public class App {
                     hive.CreateBee();
                 }
 
-                if(GuiButton(Waspbutton,"Spawn Wasp")==1 && waspButtonEnabled){
-                    try{flowers.spawnWasp();}   //wasps can't spawn if there are no bees
-                    catch(Exception e){
-                        waspButtonEnabled=false;   //if there's no bees, the button is disabled
+                if(waspButtonEnabled){
+                    if(GuiButton(WaspButton,"Spawn Wasp")==1){
+                        try{flowers.spawnWasp();
+                        }   //wasps can't spawn if there are no bees
+                        catch(RuntimeException e){
+                            waspButtonEnabled=false;   //if there's no bees, the button is disabled
+                            GuiSetState(STATE_DISABLED);
+                        }
                     }
                 }
-                
+                else{
+                    GuiSetState(STATE_DISABLED);
+                    GuiButton(WaspButton, "Spawn Wasp");
+                    GuiSetState(STATE_NORMAL);
+                }
+                if(Hive.Bees!= null&&!Hive.Bees.isEmpty()){
+                    waspButtonEnabled = true;
+                }
+                else{
+                    waspButtonEnabled = false;
+                }
+
                 String c_playing = "pause";
                 if(simulating){
                     c_playing = "Pause";
@@ -215,6 +230,18 @@ public class App {
                     default:
                         break;
                 }
+                break;
+            case Enemy enemy:
+                status="Object: "+enemy.toString()+"\n"+"Name: "+enemy.name;
+                switch (enemy){
+                    case EnemyWasp wasp:
+                    status=status + "\n"+"Bees Killed: "+Integer.toString(wasp.beesKilled)
+                                +"\n"+"Honey Stolen: "+Integer.toString(wasp.honeyStolen);
+                    break;
+                    default:
+                        break;
+                }
+                break;
             default:
                 break;
         }
