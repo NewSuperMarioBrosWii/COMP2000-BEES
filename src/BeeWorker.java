@@ -10,6 +10,7 @@ public class BeeWorker extends Bee{
     private float MaxNector = 50;
     private int TakeRate = 10;
 
+    // free marks if we use the state pattern
     private enum BeeState {
         RESTING,
         FETCHING,
@@ -34,6 +35,8 @@ public class BeeWorker extends Bee{
                 state = BeeState.FETCHING;
                 }
                 break;
+            
+
             case BeeState.FETCHING:
                 if(Target == null){
                     try{
@@ -55,6 +58,8 @@ public class BeeWorker extends Bee{
                     Position = Vector3Lerp(Position, offsetPos, deltaTime * Speed) ;
                 }
                 break;
+            
+
             case BeeState.SAPPING:
                 if(Target != null && nector < MaxNector && Target.empty == false){
                     Target.Pollen -= TakeRate * deltaTime;
@@ -65,6 +70,8 @@ public class BeeWorker extends Bee{
                     Target = null;
                 }
                 break;
+                
+
             case BeeState.STACHING:
                 if(Vector3Distance(Position, myHive.Position) < 0.1 / Speed){
                     myHive.HoneyCapacity += Math.round(nector);
@@ -76,6 +83,8 @@ public class BeeWorker extends Bee{
                     Position = Vector3Lerp(Position, myHive.Position, deltaTime * Speed);
                 }
                 break;
+
+            
             case BeeState.ATTACK:
                 
                 break;

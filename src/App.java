@@ -10,10 +10,10 @@ public class App {
 
     static boolean simulating = true;
     static boolean waspButtonEnabled=true;    
-    static float minDistance = 2.0f;
-    static float maxDistance = 40.0f;
-    static float rotationSpeed = 2.0f;
-    static float zoomSpeed = 8.0f;
+    final static float minDistance = 2.0f;
+    final static float maxDistance = 40.0f;
+    final static float rotationSpeed = 2.0f;
+    final static float zoomSpeed = 8.0f;
     
     public static void main(String[] args) throws Exception {
         InitWindow(1280, 720, "Bee Simulator");
@@ -49,6 +49,8 @@ public class App {
 
         //---
 
+        // button rectange setup area
+
         Rectangle AddBeeButton  = new Rectangle();
                 AddBeeButton.height(40).width(100);
                 AddBeeButton.x(20).y(660);
@@ -59,8 +61,9 @@ public class App {
 
         Rectangle WaspButton  = new Rectangle();
                 WaspButton.height(40).width(100);
-                WaspButton.x(20).y(610);    //assuming this spot is ok?
+                WaspButton.x(20).y(610);    //assuming this spot is ok? //yeah 👍 - james
 
+        
 
         while (!WindowShouldClose()) {
             float deltaTime = GetFrameTime();
@@ -123,33 +126,21 @@ public class App {
                                 Selected = bee;
                             }
                         }
-                        //we don't need to do this because we can downcast the queen bee into the other bees and it will know its a bee
-                        /*                         
-                            for(QueenBee queen: hive.Queens){
-                            queen.Draw(camera);
-                            queen.update(deltaTime);
-
-                            if(GetRayCollisionBox(MouseRay, queen.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-                                Selected = queen;
-                            }
-
-                        } */
                        
                     }
                     //wasp stuff
-                        if(flowers!=null){
-                            for(EnemyWasp Wasp: flowers.wasps){
-                                Wasp.Draw(camera);
-                                if(simulating){ 
-                                    Wasp.update(deltaTime);
-                                }
-                            
+                    if(flowers!=null){
+                        for(EnemyWasp Wasp: flowers.wasps){
+                            Wasp.Draw(camera);
+                            if(simulating){ 
+                                Wasp.update(deltaTime);
+                            }
 
-                                if(GetRayCollisionBox(MouseRay, Wasp.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-                                    Selected = Wasp;
-                                }
+                            if(GetRayCollisionBox(MouseRay, Wasp.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                                Selected = Wasp;
                             }
                         }
+                    }
                     
 
                 EndMode3D();
@@ -214,8 +205,18 @@ public class App {
         String status = "";
 
         switch (Item) {
-            case BeeWorker bee:
-                status = "Object: " + bee.toString() + "\n" + "Name: " + bee.Name + "\n" + "Nector Count: " + Float.toString(bee.getNectorCount());
+            case Bee bee:
+                status = "Object: " + bee.toString() + "\n" + "Name: " + bee.Name;
+                switch (bee) {
+                    case BeeWorker worker:
+                        status = status + "\n" + "Nector Count: " + Float.toString(worker.getNectorCount());
+                        break;
+                    case QueenBee Queen:
+                        status = status + "\n" + "Is this the real life?";
+                        break;
+                    default:
+                        break;
+                }
                 break;
 
             case Location place:

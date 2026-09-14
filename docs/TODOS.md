@@ -24,8 +24,8 @@ everything else should be in java docs
 
 # Specific Things
 
-- [x} Generics - (farah added one in hive)
-- [x ] Exception Handling (farah added one in hive)
+- [x] Generics - (farah added one in hive)
+- [x] Exception Handling (farah added one in hive)
 - [ ] Design Patterns
 - [ ] Interfaces
 - [x] Abstract Classes

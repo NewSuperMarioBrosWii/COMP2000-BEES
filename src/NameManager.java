@@ -8,27 +8,12 @@ import java.util.Random;
 
 public class NameManager {
     String path = "text-banks/valid-words.csv"; 
-    String chosenWord;
     ArrayList<String> dictonary;
     static public int wordLength;
-
-    public NameManager(int wLength){
-        wordLength = wLength;
-        dictonary = loadDictionary(path);
-        //this.chosenWord = randomWord();
-    }
 
     public NameManager(int wLength, String filePath){
         wordLength = wLength;
         dictonary = loadDictionary(filePath);
-
-        if(dictonary == null || dictonary.isEmpty()){
-            System.err.println("cannot get dictionary");
-            chosenWord = null;
-        }
-        else{
-            this.chosenWord = randomWord();
-        }
     }
 
     public static ArrayList<String> loadDictionary(String filePath) {
@@ -43,10 +28,6 @@ public class NameManager {
             String word;
 
             while ((word = br.readLine()) != null) {
-                //word = word.trim();
-                //if (word.length() == wordLength) {
-                    //slimDictionary.add(word.toLowerCase());
-                //}
                 slimDictionary.add(word);
             }
         } 
@@ -58,7 +39,7 @@ public class NameManager {
             System.err.println("No words are available");
         }
 
-        return slimDictionary; //returns a arraylist of all words that are at word length
+        return slimDictionary;
     }
 
     public String randomWord(){
@@ -68,8 +49,6 @@ public class NameManager {
         Random r = new Random();
         int size = dictonary.size();
         String newWord = dictonary.get(r.nextInt(size));
-        
-        this.chosenWord = newWord.toLowerCase();
         return newWord;
     }
 
@@ -77,7 +56,6 @@ public class NameManager {
         if(word.length() != wordLength){
             return false;
         }
-        
         return dictonary.contains(word);
     }
 }

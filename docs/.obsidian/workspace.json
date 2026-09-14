@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "TODOS.md",
+                "file": "Discussion Board.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TODOS"
+              "title": "Discussion Board"
             }
           }
         ]
@@ -191,10 +191,10 @@
   },
   "active": "300a18f9f21c731a",
   "lastOpenFiles": [
-    "Discussion Board.md",
-    "What Is this folder for.md",
     "Progress Tracker KanBan (obsidian).md",
+    "What Is this folder for.md",
     "TODOS.md",
+    "Discussion Board.md",
     "media/Bees.drawio.png",
     "media/Bee Hierarchy.drawio.png",
     "Untitled.canvas",
