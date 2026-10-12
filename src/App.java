@@ -61,7 +61,7 @@ public class App {
 
         Rectangle WaspButton  = new Rectangle();
                 WaspButton.height(40).width(100);
-                WaspButton.x(20).y(610);    //assuming this spot is ok? //yeah 👍 - james
+                WaspButton.x(20).y(610);
 
         
 

@@ -65,12 +65,7 @@ public class Hive extends Location {
     }
 
       public static void BeeCheck(){
-        for(Bee b : Bees){
-            if(!b.isAlive){
-                Bees.remove(b);
-                return;
-            }
-        }
+       Bees.removeIf(bee->!bee.isAlive);
     }
 
 
