@@ -205,46 +205,36 @@ public class App {
         String status = "";
 
         switch (Item) {
-            case Bee bee:
+            case Bee bee -> {
                 status = "Object: " + bee.toString() + "\n" + "Name: " + bee.Name;
                 switch (bee) {
-                    case BeeWorker worker:
-                        status = status + "\n" + "Nector Count: " + Float.toString(worker.getNectorCount());
-                        break;
-                    case QueenBee Queen:
-                        status = status + "\n" + "Is this the real life?";
-                        break;
-                    default:
-                        break;
+                    case BeeWorker worker -> {status+="\n" + "Nector Count: " + Float.toString(worker.getNectorCount());}
+                    case QueenBee Queen -> {status+="\n" + "Is this the real life?";}
+                    default->{}
                 }
                 break;
+            }
 
-            case Location place:
+            case Location place ->{
                 status = "Object: " + place.toString() + "\n" + "Name: " + place.Name;
                 switch (place) {
-                    case Hive hive:
-                        status = status + "\n" + "Honey Count: " + Integer.toString(hive.HoneyCapacity) + "\n" + "Bee Count: " + Integer.toString(hive.Bees.size());
-                        break;
-                    case Flower flower:
-                        status = status + "\n" + "Pollen Count: " + Float.toString(flower.Pollen);
-                        break;
-                    default:
-                        break;
+                    case Hive hive -> {status+="\n" + "Honey Count: " + Integer.toString(hive.HoneyCapacity)+
+                                        "\n" + "Bee Count: " + Integer.toString(hive.Bees.size());}
+                    case Flower flower -> {status+="\n" + "Pollen Count: " + Float.toString(flower.Pollen);}
+                    default -> {}
                 }
                 break;
-            case Enemy enemy:
+            }
+            case Enemy enemy -> {
                 status="Object: "+enemy.toString()+"\n"+"Name: "+enemy.name;
                 switch (enemy){
-                    case EnemyWasp wasp:
-                    status=status + "\n"+"Bees Killed: "+Integer.toString(wasp.getBeesKilled())
-                                +"\n"+"Honey Stolen: "+Integer.toString(wasp.getHoneyStolen());
-                    break;
-                    default:
-                        break;
+                    case EnemyWasp wasp -> {status+="\n"+"Bees Killed: "+Integer.toString(wasp.getBeesKilled())
+                                +"\n"+"Honey Stolen: "+Integer.toString(wasp.getHoneyStolen());}
+                    default -> {}
                 }
                 break;
-            default:
-                break;
+            }
+            default->{}
         }
 
         DrawText(status, 20, 20, 20, BLACK);
