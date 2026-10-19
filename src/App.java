@@ -219,7 +219,8 @@ public class App {
                 status = "Object: " + place.toString() + "\n" + "Name: " + place.Name;
                 switch (place) {
                     case Hive hive -> {status+="\n" + "Honey Count: " + Integer.toString(hive.HoneyCapacity)+
-                                        "\n" + "Bee Count: " + Integer.toString(hive.Bees.size());}
+                                        "\n" + "Bee Count: " + Integer.toString(hive.Bees.size())+
+                                        "\n"+"Total Bees Dead: "+hive.getTotalBeesKilled();}
                     case Flower flower -> {status+="\n" + "Pollen Count: " + Float.toString(flower.Pollen);}
                     default -> {}
                 }

@@ -3,6 +3,7 @@ import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 // when spawning a bee add it to the Bees Array instead of making new ones because they all inherit bee
 // so they can all be drawn / update in the existing loop without adding anything to App.java 👍
@@ -71,6 +72,12 @@ public class Hive extends Location {
 
     public void DrawHive(){
         CreateUniformCollider(Position, 1.0f);
+    }
+    public static int getTotalBeesKilled(){
+        ArrayList<EnemyWasp>w=Field.getWasps();
+        int totalKilled=w.stream()
+                        .collect(Collectors.summingInt(EnemyWasp::getBeesKilled));
+        return totalKilled;
     }
     
 }
