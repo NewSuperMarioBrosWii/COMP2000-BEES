@@ -8,7 +8,7 @@ import Components.CollisionBox;
 
 //🐝
 
-public class Bee implements CollisionBox {
+public class Bee implements CollisionBox, Simulated {
     public String Name = "Bee";
     float Speed = 2f;
     float Scale = 0.5f;

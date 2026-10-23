@@ -8,7 +8,7 @@ import com.raylib.Raylib.Vector3;
 import Components.CollisionBox;
 
 
-public class Enemy implements CollisionBox {
+public class Enemy implements CollisionBox, Simulated {
     String name;
     float speed = 2f; //same speed as bees?
     float scale= 0.5f;
