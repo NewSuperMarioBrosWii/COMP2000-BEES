@@ -10,3 +10,4 @@ abstract class Location implements CollisionBox{
     }
 }
 //this should probably be entity rather than location
+//could also potentially be a interface rather than a abstract class

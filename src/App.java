@@ -9,11 +9,11 @@ import com.raylib.Raylib.Vector3;
 public class App {
 
     static boolean simulating = true;
-    
-    static float minDistance = 2.0f;
-    static float maxDistance = 40.0f;
-    static float rotationSpeed = 2.0f;
-    static float zoomSpeed = 8.0f;
+    static boolean waspButtonEnabled=true;    
+    final static float minDistance = 2.0f;
+    final static float maxDistance = 40.0f;
+    final static float rotationSpeed = 2.0f;
+    final static float zoomSpeed = 8.0f;
     
     public static void main(String[] args) throws Exception {
         InitWindow(1280, 720, "Bee Simulator");
@@ -49,6 +49,8 @@ public class App {
 
         //---
 
+        // button rectange setup area
+
         Rectangle AddBeeButton  = new Rectangle();
                 AddBeeButton.height(40).width(100);
                 AddBeeButton.x(20).y(660);
@@ -56,6 +58,12 @@ public class App {
         Rectangle PauseButtonrRectangle  = new Rectangle();
                 PauseButtonrRectangle.height(40).width(100);
                 PauseButtonrRectangle.x(130).y(660);
+
+        Rectangle WaspButton  = new Rectangle();
+                WaspButton.height(40).width(100);
+                WaspButton.x(20).y(610);
+
+        
 
         while (!WindowShouldClose()) {
             float deltaTime = GetFrameTime();
@@ -106,7 +114,7 @@ public class App {
                         if(GetRayCollisionBox(MouseRay, hive.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
                             Selected = hive;
                         }
-                        
+                        Hive.BeeCheck();    //remove dead bees
                         for(Bee bee: hive.Bees){
                             bee.Draw(camera);
                             if(simulating){
@@ -118,17 +126,20 @@ public class App {
                                 Selected = bee;
                             }
                         }
-                        //we don't need to do this because we can downcast the queen bee into the other bees and it will know its a bee
-                        /*                         
-                            for(QueenBee queen: hive.Queens){
-                            queen.Draw(camera);
-                            queen.update(deltaTime);
-
-                            if(GetRayCollisionBox(MouseRay, queen.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-                                Selected = queen;
+                       
+                    }
+                    //wasp stuff
+                    if(flowers!=null){
+                        for(EnemyWasp Wasp: flowers.wasps){
+                            Wasp.Draw(camera);
+                            if(simulating){ 
+                                Wasp.update(deltaTime);
                             }
 
-                        } */
+                            if(GetRayCollisionBox(MouseRay, Wasp.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                                Selected = Wasp;
+                            }
+                        }
                     }
                     
 
@@ -138,6 +149,28 @@ public class App {
                 //this is a example button that spawns a bee
                 if(GuiButton(AddBeeButton,"Spawn Bee")==1){
                     hive.CreateBee();
+                }
+
+                if(waspButtonEnabled){
+                    if(GuiButton(WaspButton,"Spawn Wasp")==1){
+                        try{flowers.spawnWasp();
+                        }   //wasps can't spawn if there are no bees
+                        catch(RuntimeException e){
+                            waspButtonEnabled=false;   //if there's no bees, the button is disabled
+                            GuiSetState(STATE_DISABLED);
+                        }
+                    }
+                }
+                else{
+                    GuiSetState(STATE_DISABLED);
+                    GuiButton(WaspButton, "Spawn Wasp");
+                    GuiSetState(STATE_NORMAL);
+                }
+                if(Hive.Bees!= null&&!Hive.Bees.isEmpty()){
+                    waspButtonEnabled = true;
+                }
+                else{
+                    waspButtonEnabled = false;
                 }
 
                 String c_playing = "pause";
@@ -172,24 +205,37 @@ public class App {
         String status = "";
 
         switch (Item) {
-            case BeeWorker bee:
-                status = "Object: " + bee.toString() + "\n" + "Name: " + bee.Name + "\n" + "Nector Count: " + Float.toString(bee.nector);
+            case Bee bee -> {
+                status = "Object: " + bee.toString() + "\n" + "Name: " + bee.Name;
+                switch (bee) {
+                    case BeeWorker worker -> {status+="\n" + "Nector Count: " + Float.toString(worker.getNectorCount());}
+                    case QueenBee Queen -> {status+="\n" + "Is this the real life?";}
+                    default->{}
+                }
                 break;
+            }
 
-            case Location place:
+            case Location place ->{
                 status = "Object: " + place.toString() + "\n" + "Name: " + place.Name;
                 switch (place) {
-                    case Hive hive:
-                        status = status + "\n" + "Honey Count: " + Integer.toString(hive.HoneyCapacity) + "\n" + "Bee Count: " + Integer.toString(hive.Bees.size());
-                        break;
-                    case Flower flower:
-                        status = status + "\n" + "Pollen Count: " + Float.toString(flower.Pollen);
-                        break;
-                    default:
-                        break;
+                    case Hive hive -> {status+="\n" + "Honey Count: " + Integer.toString(hive.HoneyCapacity)+
+                                        "\n" + "Bee Count: " + Integer.toString(hive.Bees.size())+
+                                        "\n"+"Total Bees Dead: "+hive.getTotalBeesKilled();}
+                    case Flower flower -> {status+="\n" + "Pollen Count: " + Float.toString(flower.Pollen);}
+                    default -> {}
                 }
-            default:
                 break;
+            }
+            case Enemy enemy -> {
+                status="Object: "+enemy.toString()+"\n"+"Name: "+enemy.name;
+                switch (enemy){
+                    case EnemyWasp wasp -> {status+="\n"+"Bees Killed: "+Integer.toString(wasp.getBeesKilled())
+                                +"\n"+"Honey Stolen: "+Integer.toString(wasp.getHoneyStolen());}
+                    default -> {}
+                }
+                break;
+            }
+            default->{}
         }
 
         DrawText(status, 20, 20, 20, BLACK);

@@ -6,11 +6,12 @@ import java.util.Random;
 
 public class BeeWorker extends Bee{
 
-    float nector = 0;
-    float MaxNector = 50;
-    int TakeRate = 10;
+    private float nector = 0;
+    private float MaxNector = 50;
+    private int TakeRate = 10;
 
-    enum BeeState {
+    // free marks if we use the state pattern
+    private enum BeeState {
         RESTING,
         FETCHING,
         SAPPING,
@@ -34,6 +35,8 @@ public class BeeWorker extends Bee{
                 state = BeeState.FETCHING;
                 }
                 break;
+            
+
             case BeeState.FETCHING:
                 if(Target == null){
                     try{
@@ -44,6 +47,7 @@ public class BeeWorker extends Bee{
                     return;
                 }
                 Target.occupied = true;
+                InHive=false;
                 Vector3 offsetPos = new Vector3().y(0.8f).x(Target.Position.x()).z(Target.Position.z());
 
                 if(Vector3Distance(Position, offsetPos) < 0.1 / Speed){
@@ -54,6 +58,8 @@ public class BeeWorker extends Bee{
                     Position = Vector3Lerp(Position, offsetPos, deltaTime * Speed) ;
                 }
                 break;
+            
+
             case BeeState.SAPPING:
                 if(Target != null && nector < MaxNector && Target.empty == false){
                     Target.Pollen -= TakeRate * deltaTime;
@@ -64,16 +70,21 @@ public class BeeWorker extends Bee{
                     Target = null;
                 }
                 break;
+                
+
             case BeeState.STACHING:
                 if(Vector3Distance(Position, myHive.Position) < 0.1 / Speed){
                     myHive.HoneyCapacity += Math.round(nector);
                     nector = 0f;
+                    InHive=true;
                     state = BeeState.RESTING;
                 }
                 else{
                     Position = Vector3Lerp(Position, myHive.Position, deltaTime * Speed);
                 }
                 break;
+
+            
             case BeeState.ATTACK:
                 
                 break;
@@ -81,6 +92,8 @@ public class BeeWorker extends Bee{
                 break;
         }
     }
-
+    public float getNectorCount(){
+        return this.nector;
+    }
 
 }
