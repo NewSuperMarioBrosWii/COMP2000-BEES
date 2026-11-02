@@ -1,4 +1,7 @@
 import static com.raylib.Raylib.*;
+
+import java.util.ArrayList;
+
 import static com.raylib.Colors.*;
 import com.raylib.Raylib.Camera3D;
 import com.raylib.Raylib.Model;
@@ -36,11 +39,12 @@ public class App {
         //---
         
         // this area im mainly using for initalising the scene so ex. the field, hives and models
+        AssetManager assets = new AssetManager();
 
-        Field flowers = new Field(CameraOrigin, 9f);
+        Field flowers = new Field(CameraOrigin, 9f, assets);
         for(int i=0;i<200;i++){flowers.SpawnFlower();}//temp flower spawner
 
-        Hive hive = new Hive(new Vector3().x(0.4f).y(2.1f).z(-1f), flowers);
+        Hive hive = new Hive(new Vector3().x(0.4f).y(2.1f).z(-1f), flowers, assets);
         for(int i=0;i<50;i++){hive.CreateBee();}//temp start bee spawner
         //hive.CreateQueen();
 
@@ -94,19 +98,6 @@ public class App {
                     //this model is the whole tree and grass plain
                     DrawModel(treeModel, CameraOrigin, 1.0f, RAYWHITE);
 
-                    //this is the flowerfield update stuff
-                    if(flowers!=null){
-                        flowers.fieldCheck();
-                        for(Flower flower : flowers.flowerfield){
-                            flower.DrawFlower(camera);
-                            
-
-                            if(GetRayCollisionBox(MouseRay, flower.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-                                Selected = flower;
-                            }
-                        }
-                    }
-
                     //this is the bee update stuff
                     if(hive!=null){
                         hive.DrawHive();
@@ -128,8 +119,39 @@ public class App {
                         }
                        
                     }
-                    //wasp stuff
+
+                    
                     if(flowers!=null){
+
+                        flowers.fieldCheck();
+
+                        ArrayList<Flower> sortedFlowers = new ArrayList<>(flowers.flowerfield);
+
+                        sortedFlowers.sort((f1, f2) -> {
+                            float dx1 = f1.Position.x() - x;
+                            float dy1 = f1.Position.y() - y;
+                            float dz1 = f1.Position.z() - z;
+                            float distSq1 = dx1 * dx1 + dy1 * dy1 + dz1 * dz1;
+
+                            float dx2 = f2.Position.x() - x;
+                            float dy2 = f2.Position.y() - y;
+                            float dz2 = f2.Position.z() - z;
+                            float distSq2 = dx2 * dx2 + dy2 * dy2 + dz2 * dz2;
+
+                            return Float.compare(distSq2, distSq1); // Furthest first
+                        });
+                        
+                        for(Flower flower : sortedFlowers){
+                            flower.DrawFlower(camera);
+                            
+
+                            if(GetRayCollisionBox(MouseRay, flower.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                                Selected = flower;
+                            }
+                        }
+
+
+                        //wasp stuff
                         for(EnemyWasp Wasp: flowers.wasps){
                             Wasp.Draw(camera);
                             if(simulating){ 

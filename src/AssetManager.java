@@ -1,24 +1,62 @@
 
 import static com.raylib.Raylib.LoadTexture;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
+
 import com.raylib.Raylib.Texture;
 
 //this class may be unused but it can potentially hold the functionality of loading the textures so each class doesn't need to do it sepereately so its easier to manage in memory
 
 public class AssetManager {
-    public HashMap<String, Texture> TextureMap = new HashMap<>();
-    HashMap<String, String> TPL = new HashMap<>(); // Texture Path lookup
+    public Map<String, Texture> TextureMap = new HashMap<>();
 
     AssetManager(){
-        TPL.put("Bee", "Assets/Bee.png");
-        TPL.put("Flower", "Assets/flower.png");
-        LoadAllTextures(TPL);
+        TextureMap = loadPngTextures("Assets");
     }
 
-    void LoadAllTextures(HashMap<String, String> Paths){
-        for(String i : Paths.keySet()){
-            Texture n = LoadTexture(Paths.get(i));
-            TextureMap.put(i, n);
+    Texture GetTexture(String asset){
+        return TextureMap.get(asset);
+    }
+
+    public static Map<String, Texture> loadPngTextures(String folderPath) {
+        Map<String, Texture> textureMap = new HashMap<>();
+        Path dir = Paths.get(folderPath);
+
+        // Verify that the path exists and is a directory
+        if (!Files.exists(dir) || !Files.isDirectory(dir)) {
+            return textureMap;
         }
+
+        try (Stream<Path> stream = Files.list(dir)) {
+            stream.filter(file -> !Files.isDirectory(file))
+                  .filter(file -> {
+                      String fileName = file.getFileName().toString().toLowerCase();
+                      return fileName.endsWith(".png");
+                  })
+                  .forEach(file -> {
+                      String fullPath = file.toAbsolutePath().toString();
+                      
+                      // this gets the texutre and makes the name without the extension the key
+                      String rawFileName = file.getFileName().toString();
+                      int dotIndex = rawFileName.lastIndexOf('.');
+                      String key = (dotIndex == -1) ? rawFileName : rawFileName.substring(0, dotIndex);
+                      
+                      Texture texture = LoadTexture(fullPath);
+                      
+                      if (texture.id() > 0) {
+                          textureMap.put(key, texture);
+                      }
+                  });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return textureMap;
     }
 }

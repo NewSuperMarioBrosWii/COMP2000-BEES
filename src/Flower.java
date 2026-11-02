@@ -6,7 +6,7 @@ import com.raylib.Raylib.Vector3;
 
 public class Flower extends Location{
     public String FlowerName = "";
-    public Texture VisualTexture;// = LoadTexture("Assets/flower.png");
+    public Texture VisualTexture;
     float Scale = 1f;
     float Pollen = 100;
     boolean occupied = false;

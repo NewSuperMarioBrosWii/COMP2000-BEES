@@ -14,17 +14,19 @@ public class Hive extends Location {
     public static ArrayList<Bee> Bees = new ArrayList<>();
     //public static ArrayList<QueenBee> Queens = new ArrayList<>();
     Field field;
+    AssetManager assets;
     
-    Hive(Vector3 Location, Field field) {
+    Hive(Vector3 Location, Field field, AssetManager aManager) {
         super("Hive", Location);
         this.field = field;
+        assets = aManager;
     }
     
-    public Texture BeeTexture = LoadTexture("Assets/Bee.png");
+    //public Texture BeeTexture = LoadTexture("Assets/Bee.png");
     //this will eventually be the larva spawner
     //we need the function to select a type of bee
     public void CreateBee(){
-        BeeWorker NewBee = new BeeWorker("beeson", this, BeeTexture);
+        BeeWorker NewBee = new BeeWorker("beeson", this, assets.GetTexture("Bee"));
         Bees.add(NewBee);
     }
     /* 
