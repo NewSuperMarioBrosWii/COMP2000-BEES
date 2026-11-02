@@ -1,5 +1,3 @@
-import static com.raylib.Raylib.LoadTexture;
-import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
 import java.util.ArrayList;
 import java.util.Random;

@@ -1,5 +1,7 @@
 import static com.raylib.Colors.*;
 import static com.raylib.Raylib.*;
+
+import com.raylib.Raylib.BoundingBox;
 import com.raylib.Raylib.Camera3D;
 import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
@@ -22,6 +24,9 @@ public class Bee implements CollisionBox, Simulated {
     public boolean EnabledCollider = true;
 
     public Vector3 Position = new Vector3();
+
+    private final BoundingBox collider = new BoundingBox();
+    @Override public BoundingBox getCollider() { return collider; }
 
     Bee(String Name, Hive hive, Texture texture){
         this.Name = Name;

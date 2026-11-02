@@ -1,7 +1,7 @@
 import static com.raylib.Colors.*;
 import static com.raylib.Raylib.*;
 
-
+import com.raylib.Raylib.BoundingBox;
 import com.raylib.Raylib.Camera3D;
 import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
@@ -33,6 +33,9 @@ public class Enemy implements CollisionBox, Simulated {
         VisualTexture=LoadTexture(sprite);
         
     }*/
+
+    private final BoundingBox collider = new BoundingBox();
+    @Override public BoundingBox getCollider() { return collider; }
 
     public Enemy(String name, Vector3 spawnPos, Texture texture){
         this.name = name;

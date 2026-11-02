@@ -25,11 +25,10 @@ public class Flower extends Location{
     public void DrawFlower(Camera3D camera){
         Vector3 offsetPos = new Vector3().y(Scale/2).x(Position.x()).z(Position.z());
         DrawBillboard(camera, VisualTexture, offsetPos, Scale, RAYWHITE);
-        CreateUniformCollider(offsetPos, Scale);
+        CreateCollider(offsetPos, new Vector3().x(Scale/2).y(Scale).z(Scale/2));
         if(Pollen <= 0){
             empty = true;
         }
     }
-
 
 }

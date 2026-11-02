@@ -6,6 +6,7 @@ import static com.raylib.Colors.*;
 import com.raylib.Raylib.Camera3D;
 import com.raylib.Raylib.Model;
 import com.raylib.Raylib.Ray;
+import com.raylib.Raylib.RayCollision;
 import com.raylib.Raylib.Rectangle;
 import com.raylib.Raylib.Vector3;
 
@@ -42,10 +43,10 @@ public class App {
         AssetManager assets = new AssetManager();
 
         Field flowers = new Field(CameraOrigin, 9f, assets);
-        for(int i=0;i<200;i++){flowers.SpawnFlower();}//temp flower spawner
+        for(int i=0;i<100;i++){flowers.SpawnFlower();}//temp flower spawner
 
         Hive hive = new Hive(new Vector3().x(0.4f).y(2.1f).z(-1f), flowers, assets);
-        for(int i=0;i<50;i++){hive.CreateBee();}//temp start bee spawner
+        for(int i=0;i<10;i++){hive.CreateBee();}//temp start bee spawner
         //hive.CreateQueen();
 
         Object Selected = null;
@@ -71,7 +72,6 @@ public class App {
 
         while (!WindowShouldClose()) {
             float deltaTime = GetFrameTime();
-            Ray MouseRay = GetScreenToWorldRay(GetMousePosition(), camera);
 
             //--- this section is for processing the scene camera controls
             if (IsKeyDown(KEY_LEFT))  yaw -= rotationSpeed * deltaTime;
@@ -86,7 +86,28 @@ public class App {
             float z = CameraOrigin.z() + distance * (float) (Math.cos(pitch) * Math.cos(yaw));
 
             camera._position(new Vector3().x(x).y(y).z(z));
+
+            //the ray has to be built after the camera moves, otherwise it points through last frame's view
+            Ray MouseRay = GetScreenToWorldRay(GetMousePosition(), camera);
+
+            //don't treat clicks on the UI buttons as clicks on the scene (this was clearing the selection)
+            boolean mouseOverUI = CheckCollisionPointRec(GetMousePosition(), AddBeeButton)
+                               || CheckCollisionPointRec(GetMousePosition(), PauseButtonrRectangle)
+                               || CheckCollisionPointRec(GetMousePosition(), WaspButton);
             //---
+
+            if (simulating) {
+                if (hive != null) {
+                    Hive.BeeCheck(); 
+                    hive.Bees.parallelStream().forEach(bee -> bee.update(deltaTime));
+                }
+                
+                if (flowers != null) {
+                    flowers.fieldCheck();
+                    flowers.wasps.parallelStream().forEach(wasp -> wasp.update(deltaTime));
+                }
+            }
+
 
             //This is where all the drawing is done
             BeginDrawing();
@@ -101,32 +122,16 @@ public class App {
                     //this is the bee update stuff
                     if(hive!=null){
                         hive.DrawHive();
-
-                        if(GetRayCollisionBox(MouseRay, hive.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-                            Selected = hive;
-                        }
-                        Hive.BeeCheck();    //remove dead bees
+                        
                         for(Bee bee: hive.Bees){
                             bee.Draw(camera);
-                            if(simulating){
-                                bee.update(deltaTime);
-                            }
-                            
-
-                            if(GetRayCollisionBox(MouseRay, bee.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-                                Selected = bee;
-                            }
                         }
-                       
                     }
 
                     
                     if(flowers!=null){
-
-                        flowers.fieldCheck();
-
+                        //this might be to chunky
                         ArrayList<Flower> sortedFlowers = new ArrayList<>(flowers.flowerfield);
-
                         sortedFlowers.sort((f1, f2) -> {
                             float dx1 = f1.Position.x() - x;
                             float dy1 = f1.Position.y() - y;
@@ -141,31 +146,68 @@ public class App {
                             return Float.compare(distSq2, distSq1); // Furthest first
                         });
                         
-                        for(Flower flower : sortedFlowers){
+                        for(Flower flower : flowers.flowerfield){
                             flower.DrawFlower(camera);
-                            
-
-                            if(GetRayCollisionBox(MouseRay, flower.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-                                Selected = flower;
-                            }
                         }
 
 
                         //wasp stuff
                         for(EnemyWasp Wasp: flowers.wasps){
                             Wasp.Draw(camera);
-                            if(simulating){ 
-                                Wasp.update(deltaTime);
-                            }
 
-                            if(GetRayCollisionBox(MouseRay, Wasp.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+                            /* if(GetRayCollisionBox(MouseRay, Wasp.Collider).hit() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
                                 Selected = Wasp;
-                            }
+                            } */
                         }
                     }
                     
 
                 EndMode3D();
+
+                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !mouseOverUI) {
+                    Object closestHit = null;
+                    float closestDistance = Float.MAX_VALUE;
+
+                    // Check Hive
+                    if (hive != null) {
+                        RayCollision hiveCollision = GetRayCollisionBox(MouseRay, hive.getCollider());
+                        
+                        if (hiveCollision.hit() && hiveCollision.distance() < closestDistance) {
+                            closestDistance = hiveCollision.distance();
+                            closestHit = hive;
+                        }
+                        // Check Bees
+                        for (Bee bee : hive.Bees) {
+                            RayCollision beeCollision = GetRayCollisionBox(MouseRay, bee.getCollider());
+                            if (beeCollision.hit() && beeCollision.distance() < closestDistance) {
+                                closestDistance = beeCollision.distance();
+                                closestHit = bee;
+                            }
+                        }
+                    }
+
+                    // Check Flowers & Wasps
+                    if (flowers != null) {
+                        for (Flower flower : flowers.flowerfield) {
+                            RayCollision flowerCollision = GetRayCollisionBox(MouseRay, flower.getCollider());
+                            if (flowerCollision.hit() && flowerCollision.distance() < closestDistance) {
+                                closestDistance = flowerCollision.distance();
+                                closestHit = flower;
+                            }
+                        }
+
+                        for (EnemyWasp wasp : flowers.wasps) {
+                            RayCollision waspCollision = GetRayCollisionBox(MouseRay, wasp.getCollider());
+                            if (waspCollision.hit() && waspCollision.distance() < closestDistance) {
+                                closestDistance = waspCollision.distance();
+                                closestHit = wasp;
+                            }
+                        }
+                    }
+
+                    // Update selection (allows clicking empty space to deselect, or updates to new selection)
+                    Selected = closestHit;
+                }
 
                 if(Selected != null) DrawStats(Selected);
                 //this is a example button that spawns a bee
@@ -262,4 +304,5 @@ public class App {
 
         DrawText(status, 20, 20, 20, BLACK);
     }   
+    
 }
