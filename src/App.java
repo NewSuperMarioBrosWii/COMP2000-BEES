@@ -268,7 +268,8 @@ public class App {
             case Bee bee -> {
                 status = "Object: " + bee.toString() + "\n" + "Name: " + bee.Name;
                 switch (bee) {
-                    case BeeWorker worker -> {status+="\n" + "Nector Count: " + Float.toString(worker.getNectorCount());}
+                    case BeeWorker worker -> {status+="\n" + "Nector Count: " + Float.toString(worker.getNectorCount())
+                        +"\n"+"Health: "+Float.toString(worker.Health);}
                     case QueenBee Queen -> {status+="\n" + "Is this the real life?";}
                     default->{}
                 }
@@ -290,7 +291,8 @@ public class App {
                 status="Object: "+enemy.toString()+"\n"+"Name: "+enemy.name;
                 switch (enemy){
                     case EnemyWasp wasp -> {status+="\n"+"Bees Killed: "+Integer.toString(wasp.getBeesKilled())
-                                +"\n"+"Honey Stolen: "+Integer.toString(wasp.getHoneyStolen());}
+                                +"\n"+"Honey Stolen: "+Integer.toString(wasp.getHoneyStolen())+
+                                "\n"+"Health: "+Float.toString(wasp.health);}
                     default -> {}
                 }
                 break;

@@ -12,10 +12,14 @@ public class Bee implements CollisionBox, Simulated {
     public String Name = "Bee";
     float Speed = 2f;
     float Scale = 0.5f;
+    float Health = 100f;
+    float stingInterval=5f;
+    float stingTimer=2f;
 
     Hive myHive;
     boolean InHive = false;
     boolean isAlive = true;
+    boolean beingAttacked=false;
 
     public Texture VisualTexture;
 

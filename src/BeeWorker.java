@@ -3,6 +3,8 @@ import static com.raylib.Raylib.Vector3Distance;
 import static com.raylib.Raylib.Vector3Lerp;
 import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class BeeWorker extends Bee{
@@ -22,6 +24,7 @@ public class BeeWorker extends Bee{
 
     BeeState state = BeeState.RESTING;
     Flower Target;
+    Enemy predator;
 
     BeeWorker(String Name, Hive hive, Texture texture) {
         super(Name, hive, texture);
@@ -58,6 +61,9 @@ public class BeeWorker extends Bee{
                 else{
                     Position = Vector3Lerp(Position, offsetPos, deltaTime * Speed) ;
                 }
+                if(beingAttacked){
+                    state=BeeState.ATTACK;
+                }
                 break;
             
 
@@ -69,6 +75,9 @@ public class BeeWorker extends Bee{
                 else{
                     state = BeeState.STACHING;
                     Target = null;
+                }
+                if(beingAttacked){
+                    state=BeeState.ATTACK;
                 }
                 break;
                 
@@ -87,7 +96,32 @@ public class BeeWorker extends Bee{
 
             
             case BeeState.ATTACK:
-                
+                //find wasp attacking
+                ArrayList<EnemyWasp>w=Field.getWasps();
+                if(predator==null){
+                    predator=w.stream()
+                        .filter(p->p.target==this)
+                        .findFirst()
+                        .orElse(null);
+                }
+                if(predator!=null&&(!predator.isAlive||predator.health<=0)){   //wasp dead
+                    predator.isAlive=false;
+                    predator=null;  //reset predator
+                    beingAttacked=false;
+                    state=BeeState.RESTING; //exit out of attack mode - go rest?
+                }
+                if(!this.isAlive||Health<=0){  //bee dead
+                    Target.occupied = true;
+                    Target=null;
+                }
+                //sting wasp
+                if(predator!=null){
+                    stingTimer+=deltaTime;
+                    if(stingTimer>=stingInterval){
+                        predator.health-=20f;
+                        stingTimer=0f;
+                    }
+                }
                 break;
             default:
                 break;
