@@ -12,10 +12,11 @@ public class EnemyWasp extends Enemy {
     private int honeyStolen=0;
 
     public Texture VisualTexture;
-    boolean isAlive;
     Bee target;
     float huntTimer=0f; //time since last target pos update
     float huntInterval = 5f;    //update target pos after 5s
+    float stingTimer=0f;
+    float stingInterval=1.5f;
     
     //used when resting
     Vector3 randPos;
@@ -32,12 +33,21 @@ public class EnemyWasp extends Enemy {
         //check if bee is already dead, or in the hive
         if(!target.isAlive ||target.InHive){
             state=EnemyState.RESTING;
+            stingTimer=0f;
         }
-        else{   //bee is alive --> sting == kill?
-            target.isAlive=false;
+        else{   //bee is alive --> sting = damage bee health
+            target.Health-=25f;
+            if(target.Health<=0){
+                target.isAlive=false;
+                honeyStolen+=((BeeWorker)target).getNectorCount();
+                beesKilled++;
+                state=EnemyState.RESTING;
+                stingTimer=0f;
+            }
+            /*target.isAlive=false;
             honeyStolen+=((BeeWorker)target).getNectorCount();
             beesKilled++;
-            state=EnemyState.RESTING;
+            state=EnemyState.RESTING;*/
         }
     }
 
@@ -50,6 +60,7 @@ public class EnemyWasp extends Enemy {
 
     @Override
     public void update (float deltaTime) {
+        if(!isAlive) System.out.println("dead");
         switch(state){
             case EnemyState.RESTING:
                 if (randPos==null){
@@ -89,12 +100,21 @@ public class EnemyWasp extends Enemy {
                 Position = Vector3Lerp(Position, offsetPos, deltaTime * speed);
         // if wasp is close enough to bee, sting it
                 if (Vector3Distance (Position, offsetPos) < 0.1 / speed){
-                    Sting();
+                    stingTimer+=deltaTime;
+                    if(stingTimer>=stingInterval){
+                        target.beingAttacked=true;
+                        Sting();
+                        stingTimer=0f;
+                    }
                     if(state==EnemyState.RESTING){
+                        target.beingAttacked=false;
                         target=null;
                         randPos=getNewRandPos();
                    }
                 }
+                break;
+                default:
+                    break;
             }
     
         }

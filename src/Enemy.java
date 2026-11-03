@@ -12,6 +12,8 @@ public class Enemy implements CollisionBox, Simulated {
     String name;
     float speed = 2f; //same speed as bees?
     float scale= 0.5f;
+    boolean isAlive =true;
+    float health=100f;
     
     enum EnemyState {
         RESTING,

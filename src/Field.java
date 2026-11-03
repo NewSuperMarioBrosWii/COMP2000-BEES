@@ -20,6 +20,7 @@ public class Field extends Location{
         if (removed) {
             SpawnFlower();
         }
+        wasps.removeIf(w->!w.isAlive);
     }
 
     public void SpawnFlower(){
