@@ -107,7 +107,8 @@ public class BeeWorker extends Bee{
                 if(predator!=null&&(!predator.isAlive||predator.health<=0)){   //wasp dead
                     predator.isAlive=false;
                     predator=null;  //reset predator
-                    state=BeeState.RESTING; //resting or go back to flower?
+                    beingAttacked=false;
+                    state=BeeState.RESTING; //exit out of attack mode - go rest?
                 }
                 if(!this.isAlive||Health<=0){  //bee dead
                     Target.occupied = true;
