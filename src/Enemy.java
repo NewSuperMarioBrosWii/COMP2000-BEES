@@ -25,15 +25,6 @@ public class Enemy implements CollisionBox, Simulated {
     public boolean EnabledCollider = true;
     public Vector3 Position = new Vector3();
     public Texture VisualTexture;
-
-    //i dont think this one is needed?
-    /*public Enemy(String name, Vector3 spawnPos,String sprite){
-        this.name=name;
-        Position=spawnPos;
-        VisualTexture=LoadTexture(sprite);
-        
-    }*/
-
     private final BoundingBox collider = new BoundingBox();
     @Override public BoundingBox getCollider() { return collider; }
 

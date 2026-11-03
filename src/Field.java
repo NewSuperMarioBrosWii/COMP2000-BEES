@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Random;
-
 import com.raylib.Raylib.Vector3;
 
 
@@ -9,9 +8,6 @@ public class Field extends Location{
     public static float fieldSize = 10;
 
     AssetManager assets;
-
-    //public Texture FlowerTexture = LoadTexture("Assets/flower.png");
-    
 
     Field(Vector3 Location, float fieldSize, AssetManager aManager) {
         super("Field", Location);

@@ -1,3 +1,4 @@
+import static com.raylib.Raylib.CheckCollisionBoxes;
 import static com.raylib.Raylib.Vector3Distance;
 import static com.raylib.Raylib.Vector3Lerp;
 import com.raylib.Raylib.Texture;
@@ -50,7 +51,7 @@ public class BeeWorker extends Bee{
                 InHive=false;
                 Vector3 offsetPos = new Vector3().y(0.8f).x(Target.Position.x()).z(Target.Position.z());
 
-                if(Vector3Distance(Position, offsetPos) < 0.1 / Speed){
+                if(CheckCollisionBoxes(getCollider(), Target.getCollider())){
                     state = BeeState.SAPPING;
                 }
 
@@ -73,7 +74,7 @@ public class BeeWorker extends Bee{
                 
 
             case BeeState.STACHING:
-                if(Vector3Distance(Position, myHive.Position) < 0.1 / Speed){
+                if(CheckCollisionBoxes(getCollider(), myHive.getCollider())){
                     myHive.HoneyCapacity += Math.round(nector);
                     nector = 0f;
                     InHive=true;

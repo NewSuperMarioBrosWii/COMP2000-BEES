@@ -1,11 +1,9 @@
 import static com.raylib.Colors.*;
 import static com.raylib.Raylib.*;
-
 import com.raylib.Raylib.BoundingBox;
 import com.raylib.Raylib.Camera3D;
 import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
-
 import Components.CollisionBox;
 
 //🐝
@@ -19,7 +17,7 @@ public class Bee implements CollisionBox, Simulated {
     boolean InHive = false;
     boolean isAlive = true;
 
-    public Texture VisualTexture;// = LoadTexture("Assets/Bee.png");
+    public Texture VisualTexture;
 
     public boolean EnabledCollider = true;
 

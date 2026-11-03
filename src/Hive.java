@@ -13,6 +13,7 @@ public class Hive extends Location {
     //public static ArrayList<QueenBee> Queens = new ArrayList<>();
     Field field;
     AssetManager assets;
+    static NameManager BeeNames = new NameManager("Assets/BeeNames.txt");
     
     Hive(Vector3 Location, Field field, AssetManager aManager) {
         super("Hive", Location);
@@ -20,11 +21,10 @@ public class Hive extends Location {
         assets = aManager;
     }
     
-    //public Texture BeeTexture = LoadTexture("Assets/Bee.png");
     //this will eventually be the larva spawner
     //we need the function to select a type of bee
     public void CreateBee(){
-        BeeWorker NewBee = new BeeWorker("beeson", this, assets.GetTexture("Bee"));
+        BeeWorker NewBee = new BeeWorker(BeeNames.randomName(), this, assets.GetTexture("Bee"));
         Bees.add(NewBee);
     }
     /* 
@@ -39,7 +39,6 @@ public class Hive extends Location {
             if (!flower.occupied){
                 anyFree = true;
                 break;
-
             }
             
         }

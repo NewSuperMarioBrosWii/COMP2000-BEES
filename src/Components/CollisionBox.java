@@ -1,7 +1,6 @@
 package Components;
 import static com.raylib.Colors.RED;
 import static com.raylib.Raylib.*;
-
 import com.raylib.Raylib.BoundingBox;
 import com.raylib.Raylib.Vector3;
 
@@ -12,11 +11,8 @@ import com.raylib.Raylib.Vector3;
 */
 
 public interface CollisionBox {
-    //set to false to hide the red debug boxes
     boolean ShowColliders = true;
- 
-    //each implementer returns its OWN box
-    BoundingBox getCollider();
+    BoundingBox getCollider(); // use this to get the box
  
     default void CreateUniformCollider(Vector3 Position, float Scale){
         CreateCollider(Position, new Vector3().x(Scale).y(Scale).z(Scale));
@@ -31,7 +27,7 @@ public interface CollisionBox {
                                        .z(Position.z() + Scale.z()/2));
     }
     
-    default void DrawColliderBox(){
+    default void DrawColliderBox(BoundingBox collider){
         if(ShowColliders){DrawBoundingBox(getCollider(), RED);}
     }
 }
