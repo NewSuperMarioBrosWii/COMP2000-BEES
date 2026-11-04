@@ -11,21 +11,14 @@
             "id": "300a18f9f21c731a",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "markdown",
               "state": {
-                "file": "Progress Tracker KanBan (obsidian).md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false,
-                    false
-                  ]
-                }
+                "file": "Class Overview.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-trello",
-              "title": "Progress Tracker KanBan (obsidian)"
+              "icon": "lucide-file",
+              "title": "Class Overview"
             }
           }
         ]
@@ -198,14 +191,14 @@
   },
   "active": "300a18f9f21c731a",
   "lastOpenFiles": [
+    "TODOS.md",
     "Class Overview.md",
     "Discussion Board.md",
-    "media/Bees.drawio.png",
-    "media/Bee Hierarchy.drawio.png",
     "Progress Tracker KanBan (obsidian).md",
     "What Is this folder for.md",
-    "TODOS.md",
     "Untitled.canvas",
+    "media/Bees.drawio.png",
+    "media/Bee Hierarchy.drawio.png",
     "Untitled.base",
     "Visuals.md",
     "Projects",
