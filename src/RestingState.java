@@ -18,13 +18,13 @@ public class RestingState implements BeeState {
 
         doTime += deltaTime;
 
-        if (RNG.nextInt(1, 10) < 3) {
+        if (RNG.nextInt(1, 10) < 3 && doTime > doTimer) {
             bee.changeState(new FetchingState());
         }
         else{
             if(doTime > doTimer){
                 moveDir = pickDirection();
-                doTimer = RNG.nextInt(1, 3);
+                doTimer = RNG.nextInt(1, 2);
                 doTime = 0;
             }
             else{
