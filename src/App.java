@@ -56,15 +56,15 @@ public class App {
 
         Rectangle AddBeeButton  = new Rectangle();
                 AddBeeButton.height(40).width(100);
-                AddBeeButton.x(20).y(760);
+                AddBeeButton.x(20).y(840);
         
         Rectangle PauseButtonrRectangle  = new Rectangle();
                 PauseButtonrRectangle.height(40).width(100);
-                PauseButtonrRectangle.x(130).y(760);
+                PauseButtonrRectangle.x(130).y(840);
 
         Rectangle WaspButton  = new Rectangle();
                 WaspButton.height(40).width(100);
-                WaspButton.x(20).y(710);
+                WaspButton.x(240).y(840);
 
         
         // The Running Loop
@@ -250,11 +250,6 @@ public class App {
         }
     }
 
-    void DrawButtons(){
-        
-    }
-
-
 
     //the text can be made with DrawText
     //its probably good to have the full string of data layed out and then drawing it with one call
@@ -267,7 +262,7 @@ public class App {
                 switch (bee) {
                     case BeeWorker worker -> {status+="\n" + "Nector Count: " + Float.toString(worker.getNectorCount())
                         +"\n"+"Health: "+Float.toString(worker.Health) + "\n" + "State: " + worker.getCurrentStateName();}
-                    case QueenBee Queen -> {status+="\n" + "Is this the real life?";}
+                    //case QueenBee Queen -> {status+="\n" + "Is this the real life?";}
                     default->{}
                 }
                 break;
