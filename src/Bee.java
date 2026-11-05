@@ -51,4 +51,13 @@ public class Bee implements CollisionBox, Simulated {
             CreateUniformCollider(Position, Scale);
         }
     }
+
+    public static void movePosition(Vector3 position, Vector3 direction, float speed, float deltaTime) {
+        float newX = position.x() + (direction.x() * speed * deltaTime);
+        float newY = position.y() + (direction.y() * speed * deltaTime);
+        float newZ = position.z() + (direction.z() * speed * deltaTime);
+        position.x(newX);
+        position.y(newY);
+        position.z(newZ);
+    }
 }

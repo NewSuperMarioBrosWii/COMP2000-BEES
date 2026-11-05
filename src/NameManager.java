@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-//i stole this from my comp1010 project
-
 public class NameManager {
-    //String path = "text-banks/valid-words.csv"; 
     ArrayList<String> dictonary;
 
     public NameManager(String filePath){

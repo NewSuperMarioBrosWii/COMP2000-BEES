@@ -1,7 +1,5 @@
 import static com.raylib.Raylib.*;
-
 import java.util.ArrayList;
-
 import static com.raylib.Colors.*;
 import com.raylib.Raylib.Camera3D;
 import com.raylib.Raylib.Model;
@@ -9,7 +7,6 @@ import com.raylib.Raylib.Ray;
 import com.raylib.Raylib.RayCollision;
 import com.raylib.Raylib.Rectangle;
 import com.raylib.Raylib.Vector3;
-
 import Components.CollisionBox;
 
 public class App {
@@ -22,7 +19,7 @@ public class App {
     final static float zoomSpeed = 8.0f;
     
     public static void main(String[] args) throws Exception {
-        InitWindow(1280, 720, "Bee Simulator");
+        InitWindow(1600, 900, "Bee Simulator");
         SetTargetFPS(60);
 
         //--- this is all camera setup releated stuff
@@ -59,15 +56,15 @@ public class App {
 
         Rectangle AddBeeButton  = new Rectangle();
                 AddBeeButton.height(40).width(100);
-                AddBeeButton.x(20).y(660);
+                AddBeeButton.x(20).y(760);
         
         Rectangle PauseButtonrRectangle  = new Rectangle();
                 PauseButtonrRectangle.height(40).width(100);
-                PauseButtonrRectangle.x(130).y(660);
+                PauseButtonrRectangle.x(130).y(760);
 
         Rectangle WaspButton  = new Rectangle();
                 WaspButton.height(40).width(100);
-                WaspButton.x(20).y(610);
+                WaspButton.x(20).y(710);
 
         
         // The Running Loop
@@ -269,7 +266,7 @@ public class App {
                 status = "Object: " + bee.toString() + "\n" + "Name: " + bee.Name;
                 switch (bee) {
                     case BeeWorker worker -> {status+="\n" + "Nector Count: " + Float.toString(worker.getNectorCount())
-                        +"\n"+"Health: "+Float.toString(worker.Health);}
+                        +"\n"+"Health: "+Float.toString(worker.Health) + "\n" + "State: " + worker.getCurrentStateName();}
                     case QueenBee Queen -> {status+="\n" + "Is this the real life?";}
                     default->{}
                 }

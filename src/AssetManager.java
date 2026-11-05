@@ -1,4 +1,3 @@
-
 import static com.raylib.Raylib.LoadTexture;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,8 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 import com.raylib.Raylib.Texture;
-
-//this class may be unused but it can potentially hold the functionality of loading the textures so each class doesn't need to do it sepereately so its easier to manage in memory
 
 public class AssetManager {
     public Map<String, Texture> TextureMap = new HashMap<>();
