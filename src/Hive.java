@@ -79,10 +79,7 @@ public class Hive extends Location {
         CreateUniformCollider(Position, 1.0f);
     }
     public static int getTotalBeesKilled(){
-        ArrayList<EnemyWasp>w=Field.getWasps();
-        int totalKilled=w.stream()
-                        .collect(Collectors.summingInt(EnemyWasp::getBeesKilled));
-        return totalKilled;
+        return Enemy.totalBeesKilled;
     }
     
 }

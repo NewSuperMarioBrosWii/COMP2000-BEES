@@ -14,6 +14,7 @@ public class Enemy implements CollisionBox, Simulated {
     float scale= 0.5f;
     boolean isAlive =true;
     float health=100f;
+    static int totalBeesKilled=0;
     
     enum EnemyState {
         RESTING,

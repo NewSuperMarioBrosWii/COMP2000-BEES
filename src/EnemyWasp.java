@@ -43,6 +43,7 @@ public class EnemyWasp extends Enemy {
                 target.isAlive=false;
                 honeyStolen+=((BeeWorker)target).getNectorCount();
                 beesKilled++;
+                totalBeesKilled++;
                 stingTimer=0f;
                 state=EnemyState.RESTING;
             }

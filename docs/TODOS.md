@@ -11,7 +11,7 @@ everything else should be in java docs
 - [x] Base Bee Class
 	- [x] Worker Bee
 		- [x] Attack State
-		- [ ] Rest State
+		- [x] Rest State
 	- [X] Queen Bee - farah
 	- [ ] Another Bee Type - e.g. Guard
 - [ ] Larvae Class?
@@ -35,5 +35,6 @@ everything else should be in java docs
 - [x] Streams
 - [x] Lambdas
 - [x] Parallelism
+- [ ] Collectors?
 - [ ] Uniqueness/Creativity (something we haven't done in class)
 - [ ] Update Class Overview
