@@ -12,6 +12,7 @@ public class FetchingState implements BeeState {
                 bee.Target.occupied = true;
             } catch (Hive.NoAvailableFlowerException e) {
                 // no flower free right now - try again next frame
+                bee.changeState(new RestingState());
             }
             return;
         }

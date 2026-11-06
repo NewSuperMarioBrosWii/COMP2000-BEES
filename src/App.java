@@ -6,6 +6,7 @@ import com.raylib.Raylib.Model;
 import com.raylib.Raylib.Ray;
 import com.raylib.Raylib.RayCollision;
 import com.raylib.Raylib.Rectangle;
+import com.raylib.Raylib.Vector2;
 import com.raylib.Raylib.Vector3;
 import Components.CollisionBox;
 
@@ -40,11 +41,11 @@ public class App {
         AssetManager assets = new AssetManager();
 
         Field flowers = new Field(CameraOrigin, 9f, assets);
-        for(int i=0;i<100;i++){flowers.SpawnFlower();}//temp flower spawner
+        for(int i=0;i<10;i++){flowers.SpawnFlower();}//temp flower spawner
 
         Hive hive = new Hive(new Vector3().x(0.4f).y(2.1f).z(-1f), flowers, assets);
-        for(int i=0;i<10;i++){hive.CreateBee();}//temp start bee spawner
-
+        //for(int i=0;i<10;i++){hive.CreateBee();}//temp start bee spawner
+        hive.CreateBee();
         //hive.CreateQueen();
 
         Object Selected = null;
@@ -84,22 +85,24 @@ public class App {
             float z = CameraOrigin.z() + distance * (float) (Math.cos(pitch) * Math.cos(yaw));
             camera._position(new Vector3().x(x).y(y).z(z));
 
-            Ray MouseRay = GetScreenToWorldRay(GetMousePosition(), camera);
+            Vector2 MousePos = GetMousePosition();
+            Ray MouseRay = GetScreenToWorldRay(MousePos, camera);
             //---
-
-            boolean mouseOverUI = CheckCollisionPointRec(GetMousePosition(), AddBeeButton)
-                               || CheckCollisionPointRec(GetMousePosition(), PauseButtonrRectangle)
-                               || CheckCollisionPointRec(GetMousePosition(), WaspButton);
+            
+            boolean mouseOverUI = CheckCollisionPointRec(MousePos, AddBeeButton)
+                               || CheckCollisionPointRec(MousePos, PauseButtonrRectangle)
+                               || CheckCollisionPointRec(MousePos, WaspButton);
 
             //this is new where the bee's and wasps are updated done using streams
             if (simulating) {
                 if (hive != null) {
-                    Hive.BeeCheck(); 
+                    hive.BeeCheck(); 
+                    hive.myQueen.update(deltaTime);
                     hive.Bees.parallelStream().forEach(bee -> bee.update(deltaTime));
                 }
                 
                 if (flowers != null) {
-                    flowers.fieldCheck();
+                    flowers.fieldCheck(deltaTime);
                     flowers.wasps.parallelStream().forEach(wasp -> wasp.update(deltaTime));
                 }
             }
@@ -112,7 +115,7 @@ public class App {
                 //This is where the 3d is drawn
                 BeginMode3D(camera);
 
-                    //this model is the whole tree and grass plain
+                    //this model is the whole tree and grass plain 
                     DrawModel(treeModel, CameraOrigin, 1.0f, RAYWHITE);
 
                     //this is the bee update stuff
@@ -136,7 +139,6 @@ public class App {
                             float dy1 = f1.Position.y() - y;
                             float dz1 = f1.Position.z() - z;
                             float distSq1 = dx1 * dx1 + dy1 * dy1 + dz1 * dz1;
-
                             float dx2 = f2.Position.x() - x;
                             float dy2 = f2.Position.y() - y;
                             float dz2 = f2.Position.z() - z;

@@ -3,9 +3,14 @@ import java.util.Random;
 import com.raylib.Raylib.Vector3;
 
 
-public class Field extends Location{
+public class Field extends Location {
     public ArrayList<Flower> flowerfield = new ArrayList<>();
     public static float fieldSize = 10;
+
+    Random rand = new Random();
+
+    float flowerTime = 0f;
+    float flowerTimer = 10f;
 
     AssetManager assets;
 
@@ -15,12 +20,18 @@ public class Field extends Location{
         assets = aManager;
     }
 
-    public void fieldCheck(){
-        boolean removed = this.flowerfield.removeIf(f -> f != null && f.empty);
-        if (removed) {
-            SpawnFlower();
-        }
+    public void fieldCheck(float deltaTime){
+        flowerTime += deltaTime;
         wasps.removeIf(w->!w.isAlive);
+        boolean removed = this.flowerfield.removeIf(f -> f != null && f.empty);
+        if (removed && rand.nextInt(0, 10) > 3) {
+            SpawnFlower();
+            SpawnFlower();
+        }else if(flowerTime > flowerTimer){
+            SpawnFlower();
+            flowerTimer = rand.nextFloat(5f, 10f);
+            flowerTime = 0f;
+        }
     }
 
     public void SpawnFlower(){
@@ -36,7 +47,6 @@ public class Field extends Location{
 
     // Wasp Stuff
 
-    //public Texture WaspTexture = LoadTexture("Assets/wasp.png");
     public static ArrayList<EnemyWasp> wasps = new ArrayList<>();
 
     public void spawnWasp(){

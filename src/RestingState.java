@@ -1,5 +1,4 @@
 import java.util.Random;
-
 import com.raylib.Raylib.Vector3;
 
 public class RestingState implements BeeState {
@@ -7,7 +6,7 @@ public class RestingState implements BeeState {
 
 
     float doTime = 0;
-    int doTimer = 5;
+    int doTimer = 2;
 
     Vector3 moveDir = new Vector3();
 
@@ -28,7 +27,7 @@ public class RestingState implements BeeState {
                 doTime = 0;
             }
             else{
-                bee.movePosition(bee.Position,moveDir, 2f,deltaTime);
+                bee.movePosition(bee.Position,moveDir, 1f,deltaTime);
             }
         }
     }

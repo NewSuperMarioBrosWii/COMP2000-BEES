@@ -1,4 +1,7 @@
 import com.raylib.Raylib.Vector3;
+
+import static com.raylib.Raylib.Vector3Add;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -10,6 +13,7 @@ public class Hive extends Location {
 
     public int HoneyCapacity = 0;
     public static ArrayList<Bee> Bees = new ArrayList<>();
+    public QueenBee myQueen;
     //public static ArrayList<QueenBee> Queens = new ArrayList<>();
     Field field;
     AssetManager assets;
@@ -19,6 +23,8 @@ public class Hive extends Location {
         super("Hive", Location);
         this.field = field;
         assets = aManager;
+        myQueen = new QueenBee(Name, this, assets.GetTexture("Bee"));
+        myQueen.Position = Vector3Add(Position, new Vector3().y(2f)) ;
     }
     
     //this will eventually be the larva spawner
@@ -64,7 +70,7 @@ public class Hive extends Location {
         return list.get(new Random().nextInt(list.size()));
     }
 
-      public static void BeeCheck(){
+    public static void BeeCheck(){
        Bees.removeIf(bee->!bee.isAlive);
     }
 
