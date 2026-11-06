@@ -12,7 +12,6 @@ kanban-plugin: board
 
 ## In Progress
 
-- [ ] Flower Generator
 - [ ] Base Enemy class
 
 
@@ -21,12 +20,13 @@ kanban-plugin: board
 - [ ] Scene Drawing
 - [ ] Object Picker
 - [ ] Wasps
+- [ ] Flower Generator
+- [ ] Worker Bee
+- [ ] Base Bee Class
 
 
 ## Refactor/Rework
 
-- [ ] Worker Bee
-- [ ] Base Bee Class
 
 
 

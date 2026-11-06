@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Class Overview.md",
+                "file": "TODOS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Class Overview"
+              "title": "TODOS"
             }
           }
         ]
@@ -191,11 +191,11 @@
   },
   "active": "300a18f9f21c731a",
   "lastOpenFiles": [
-    "TODOS.md",
+    "What Is this folder for.md",
     "Class Overview.md",
     "Discussion Board.md",
     "Progress Tracker KanBan (obsidian).md",
-    "What Is this folder for.md",
+    "TODOS.md",
     "Untitled.canvas",
     "media/Bees.drawio.png",
     "media/Bee Hierarchy.drawio.png",

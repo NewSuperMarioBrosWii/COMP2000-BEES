@@ -29,7 +29,7 @@ everything else should be in java docs
 
 - [x] Generics - (farah added one in hive)
 - [x] Exception Handling (farah added one in hive)
-- [ ] Design Patterns - James
+- [x] Design Patterns - James
 - [x] Interfaces (CollisionBox, Simulated)
 - [x] Abstract Classes
 - [x] Streams
