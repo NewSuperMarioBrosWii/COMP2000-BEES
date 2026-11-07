@@ -11,14 +11,12 @@
             "id": "300a18f9f21c731a",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "TODOS.md",
-                "mode": "source",
-                "source": false
+                "file": "media/Bee Hierarchy.drawio.png"
               },
-              "icon": "lucide-file",
-              "title": "TODOS"
+              "icon": "lucide-image",
+              "title": "Bee Hierarchy.drawio"
             }
           }
         ]
@@ -191,13 +189,14 @@
   },
   "active": "300a18f9f21c731a",
   "lastOpenFiles": [
+    "media/Bees.drawio.png",
+    "media/beeStatePattern.drawio.png",
+    "TODOS.md",
     "What Is this folder for.md",
     "Progress Tracker KanBan (obsidian).md",
     "Discussion Board.md",
     "Class Overview.md",
-    "TODOS.md",
     "Untitled.canvas",
-    "media/Bees.drawio.png",
     "media/Bee Hierarchy.drawio.png",
     "Untitled.base",
     "Visuals.md",
