@@ -1,7 +1,7 @@
 import static com.raylib.Colors.*;
 import static com.raylib.Raylib.*;
 
-
+import com.raylib.Raylib.BoundingBox;
 import com.raylib.Raylib.Camera3D;
 import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
@@ -12,6 +12,9 @@ public class Enemy implements CollisionBox, Simulated {
     String name;
     float speed = 2f; //same speed as bees?
     float scale= 0.5f;
+    boolean isAlive =true;
+    float health=100f;
+    static int totalBeesKilled=0;
     
     enum EnemyState {
         RESTING,
@@ -25,14 +28,8 @@ public class Enemy implements CollisionBox, Simulated {
     public boolean EnabledCollider = true;
     public Vector3 Position = new Vector3();
     public Texture VisualTexture;
-
-    //i dont think this one is needed?
-    /*public Enemy(String name, Vector3 spawnPos,String sprite){
-        this.name=name;
-        Position=spawnPos;
-        VisualTexture=LoadTexture(sprite);
-        
-    }*/
+    private final BoundingBox collider = new BoundingBox();
+    @Override public BoundingBox getCollider() { return collider; }
 
     public Enemy(String name, Vector3 spawnPos, Texture texture){
         this.name = name;

@@ -1,6 +1,7 @@
-import static com.raylib.Raylib.LoadTexture;
-import com.raylib.Raylib.Texture;
 import com.raylib.Raylib.Vector3;
+
+import static com.raylib.Raylib.Vector3Add;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -12,19 +13,24 @@ public class Hive extends Location {
 
     public int HoneyCapacity = 0;
     public static ArrayList<Bee> Bees = new ArrayList<>();
+    public QueenBee myQueen;
     //public static ArrayList<QueenBee> Queens = new ArrayList<>();
     Field field;
+    AssetManager assets;
+    static NameManager BeeNames = new NameManager("Assets/BeeNames.txt");
     
-    Hive(Vector3 Location, Field field) {
+    Hive(Vector3 Location, Field field, AssetManager aManager) {
         super("Hive", Location);
         this.field = field;
+        assets = aManager;
+        myQueen = new QueenBee(Name, this, assets.GetTexture("Bee"));
+        myQueen.Position = Vector3Add(Position, new Vector3().y(2f)) ;
     }
     
-    public Texture BeeTexture = LoadTexture("Assets/Bee.png");
     //this will eventually be the larva spawner
     //we need the function to select a type of bee
     public void CreateBee(){
-        BeeWorker NewBee = new BeeWorker("beeson", this, BeeTexture);
+        BeeWorker NewBee = new BeeWorker(BeeNames.randomName(), this, assets.GetTexture("Bee"));
         Bees.add(NewBee);
     }
     /* 
@@ -39,7 +45,6 @@ public class Hive extends Location {
             if (!flower.occupied){
                 anyFree = true;
                 break;
-
             }
             
         }
@@ -65,7 +70,7 @@ public class Hive extends Location {
         return list.get(new Random().nextInt(list.size()));
     }
 
-      public static void BeeCheck(){
+    public static void BeeCheck(){
        Bees.removeIf(bee->!bee.isAlive);
     }
 
@@ -74,10 +79,7 @@ public class Hive extends Location {
         CreateUniformCollider(Position, 1.0f);
     }
     public static int getTotalBeesKilled(){
-        ArrayList<EnemyWasp>w=Field.getWasps();
-        int totalKilled=w.stream()
-                        .collect(Collectors.summingInt(EnemyWasp::getBeesKilled));
-        return totalKilled;
+        return Enemy.totalBeesKilled;
     }
     
 }

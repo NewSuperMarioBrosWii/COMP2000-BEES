@@ -1,7 +1,6 @@
 package Components;
 import static com.raylib.Colors.RED;
 import static com.raylib.Raylib.*;
-
 import com.raylib.Raylib.BoundingBox;
 import com.raylib.Raylib.Vector3;
 
@@ -12,26 +11,23 @@ import com.raylib.Raylib.Vector3;
 */
 
 public interface CollisionBox {
-    public boolean DrawCollider = false;
-    public BoundingBox Collider = new BoundingBox();
-
-    public default void CreateUniformCollider(Vector3 Position, float Scale){
-        Collider.min(new Vector3().x(Position.x() - Scale/2)
-                                  .y(Position.y() - Scale/2)
-                                  .z(Position.z() - Scale/2))
-                .max(new Vector3().x(Position.x() + Scale/2)
-                                  .y(Position.y() + Scale/2)
-                                  .z(Position.z() + Scale/2));
-        if(DrawCollider){DrawBoundingBox(Collider, RED);}
+    boolean ShowColliders = true;
+    BoundingBox getCollider(); // use this to get the box
+ 
+    default void CreateUniformCollider(Vector3 Position, float Scale){
+        CreateCollider(Position, new Vector3().x(Scale).y(Scale).z(Scale));
     }
 
-    public default void CreateCollider(Vector3 Position, Vector3 Scale){
-        Collider.min(new Vector3().x(Position.x() - Scale.x()/2)
-                                  .y(Position.y() - Scale.y()/2)
-                                  .z(Position.z() - Scale.z()/2))
-                .max(new Vector3().x(Position.x() + Scale.x()/2)
-                                  .y(Position.y() + Scale.y()/2)
-                                  .z(Position.z() + Scale.z()/2));
-        if(DrawCollider){DrawBoundingBox(Collider, RED);}
+    default void CreateCollider(Vector3 Position, Vector3 Scale){
+        getCollider().min(new Vector3().x(Position.x() - Scale.x()/2)
+                                       .y(Position.y() - Scale.y()/2)
+                                       .z(Position.z() - Scale.z()/2))
+                     .max(new Vector3().x(Position.x() + Scale.x()/2)
+                                       .y(Position.y() + Scale.y()/2)
+                                       .z(Position.z() + Scale.z()/2));
+    }
+    
+    default void DrawColliderBox(BoundingBox collider){
+        if(ShowColliders){DrawBoundingBox(getCollider(), RED);}
     }
 }

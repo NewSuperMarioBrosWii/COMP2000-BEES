@@ -20,3 +20,7 @@ the current worker bee is quite temporary and also flowers currently crash the s
 - nothing should really be added to the main App.java script if you want to spawn a bee do it through the hive
 	- the hive still needs a function to spawn a random type of bee instead of just 1
 - anything that changes overtime should be multiplied by deltatime
+
+---
+
+erm we may be uncountering some small performance hiccups idk there this stems from but i assume its garbage collection causing this
